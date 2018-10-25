@@ -3,7 +3,6 @@
     height: auto;
     width: 100%;
     display: inline-block;
-    margin-bottom: 10px;
 }
 
 .left {
@@ -28,7 +27,7 @@
 
 .left p {
     margin: auto;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bold;
     color: rgb(53, 131, 234);
 }
