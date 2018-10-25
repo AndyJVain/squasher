@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/new-bug.css">
+    <link rel="stylesheet" href="css/header.css">
 
     <title>Squasher - New Bug Report</title>
 </head>
@@ -17,11 +18,65 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-light">
-            <div class="navbar-brand">Bug Tracker - My Bugs</div>
+            <div class="navbar-brand">New Bug Report</div>
             <ul class="nav navbar-nav navbar-right pull-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
+
+        <div class="header">
+            <div class="left">
+                <p>Bug Tracker Report Form</p>
+            </div>
+            <div class="right">
+                <a type="button" class="btn btn-primary btn-lg" href="home.html">My Bugs</a>
+            </div>
+        </div>
+
+        <div class="form">
+            <form>
+                <div class="form-group">
+                    <label for="select-product">Product</label>
+                    <select class="form-control" id="select-product">
+                        <option>Camino</option>
+                        <option>CourseAvail</option>
+                        <option>eCampus</option>
+                        <option>Library</option>
+                        <option>SCU Website</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="set-title">Title</label>
+                    <input type="text" class="form-control" id="set-title" placeholder="Enter a descriptive title for your report">
+                </div>
+                <div class="form-group">
+                    <label for="select-type">Bug Type</label>
+                    <select class="form-control" id="select-type">
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                        <option>D</option>
+                        <option>E</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="select-rep">Reproducability</label>
+                    <select class="form-control" id="select-rep">
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                        <option>D</option>
+                        <option>E</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="descritption">Description</label>
+                    <textarea class="form-control" id="description" rows="10">Summary:</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+            </form>
+        </div>
+
     </div>
 
     <!-- Optional JavaScript -->
