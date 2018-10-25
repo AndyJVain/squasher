@@ -1,0 +1,3 @@
+
+How to connect PHP and Javascript:
+https://stackoverflow.com/questions/10326362/using-javascript-and-php-together-to-validate
