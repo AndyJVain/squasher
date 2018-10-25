@@ -1,0 +1,25 @@
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 50px;
+}
+
+.center-vert {
+    padding: 50px;
+}
+
+.light-gray {
+    background-color: #EFEFEF;
+}
+
+.dark-gray {
+    background-color: #C4C4C4;
+}
+
+.rounded {
+    border-radius: 2px;
+}
+
+.text-blue {
+    color: #2F80ED;
+}
