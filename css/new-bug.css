@@ -2,6 +2,7 @@
     background-color: rgb(239, 239, 239);
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 40px;
 }
 
 .form-group {
@@ -15,5 +16,5 @@
 }
 
 .submit-btn {
-    font-size: 25px; 
+    font-size: 25px;
 }

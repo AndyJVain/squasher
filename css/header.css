@@ -29,7 +29,7 @@
     margin: auto;
     font-size: 30px;
     font-weight: bold;
-    color: rgb(53, 131, 234);
+    color: #2F80ED;
 }
 
 .left input {
@@ -39,5 +39,8 @@
 
 .right a {
     font-size: 25px;
-    background-color: rgb(53, 131, 234);
+}
+
+.btn {
+    background-color: #2F80ED;
 }
