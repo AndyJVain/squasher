@@ -1,20 +1,26 @@
 .form {
-    background-color: rgb(239, 239, 239);
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
 }
 
 .form-group {
     margin-bottom: 30px;
-    font-size: 30px;
-    color: rgb(53, 131, 234);
+    font-size: 20px;
 }
 
-.form-control {
-    font-size: 25px;
+.left p {
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-.submit-btn {
-    font-size: 25px;
+@media only screen and (max-width: 600px) {
+    .left p {
+        font-size: 18px;
+    }
+
+    label {
+        font-size: 16px;
+    }
 }
