@@ -1,0 +1,27 @@
+.container {
+    padding: 40px;
+}
+
+p {
+    text-align: center;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 600px) {
+    .center {
+        width: 50%;
+    }
+}
+
+.center {
+    margin: auto;
+    padding: 50px;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    float: right;
+}

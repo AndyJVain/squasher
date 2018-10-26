@@ -9,30 +9,31 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/create.css">
 
     <title>Squasher - Create Account</title>
 </head>
 
 <body>
-    <div class="center-vert">
-        <p style="text-align: center">Create an account</p>
-        <div class="light-gray center rounded">
-            <div id="form">
+    <div class="container">
+        <p>Create an account</p>
+        <div class="center rounded light-gray">
+            <div id="form light-gray">
                 <form>
                     <div class="form-group">
-                        <label for="username" class="text-blue">Username</label>
+                        <label for="username" class="blue-text">Username</label>
                         <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Enter Username">
                     </div>
                     <div class="form-group">
-                        <label for="password" class="text-blue">Password</label>
+                        <label for="password" class="blue-text">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Create Password">
                     </div>
                     <div class="form-group">
-                        <label for="email" class="text-blue">Email</label>
+                        <label for="email" class="blue-text">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="Enter Email">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="float: right;">Create</button>
-                    <button type="submit" class="btn btn-defualt text-blue"><a href="login.html">Cancel</a></button>
+                    <a type="button" class="btn btn-primary blue" href="login.html">Create</a>
+                    <a type="button" class="btn btn-secondary white" href="login.html">Cancel</a>
                 </form>
             </div>
         </div>

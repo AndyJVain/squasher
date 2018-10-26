@@ -1,0 +1,32 @@
+.container {
+    padding: 40px;
+}
+
+@media only screen and (min-width: 600px) {
+    .center {
+        width: 50%;
+    }
+}
+
+.center {
+    margin: auto;
+    padding: 50px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+label {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding-left: 3px;
+}
+
+.create {
+    text-align: center;
+    margin-top: 20px;
+}

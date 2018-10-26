@@ -8,9 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/new-bug.css">
-    <link rel="stylesheet" href="../css/header.css">
 
     <title>Squasher - New Bug Report</title>
 </head>
@@ -18,24 +17,24 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-light">
-            <div class="navbar-brand">New Bug Report</div>
+            <div class="navbar-brand">Report New Bug</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="darker-gray-text" href="login.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
 
         <div class="header">
-            <div class="left">
-                <p>Bug Tracker Report Form</p>
+            <div class="left blue-text">
+                <p>Bug Report Form</p>
             </div>
             <div class="right">
-                <a type="button" class="btn btn-primary btn-lg" href="home.html">My Bugs</a>
+                <a type="button" class="btn btn-primary btn-lg blue" href="home.html">My Bugs</a>
             </div>
         </div>
 
-        <div class="form">
+        <div class="form light-gray">
             <form>
-                <div class="form-group">
+                <div class="form-group blue-text">
                     <label for="select-product">Product</label>
                     <select class="form-control" id="select-product">
                         <option value="" disabled selected>Select a product</option>
@@ -46,11 +45,11 @@
                         <option>SCU Website</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group blue-text">
                     <label for="set-title">Title</label>
                     <input type="text" class="form-control" id="set-title" placeholder="Enter a descriptive title for your report">
                 </div>
-                <div class="form-group">
+                <div class="form-group blue-text">
                     <label for="select-type">Bug Type</label>
                     <select class="form-control" id="select-type">
                         <option value="" disabled selected>Select a bug type</option>
@@ -63,7 +62,7 @@
                         <option>Other Bug</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group blue-text">
                     <label for="select-rep">Reproducability</label>
                     <select class="form-control" id="select-rep">
                         <option value="" disabled selected>Select a reproducability</option>
@@ -74,11 +73,11 @@
                         <option>I Didn't Try</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group blue-text">
                     <label for="descritption">Description</label>
-                    <textarea class="form-control" id="description" rows="12">Summary:&#10;&#10;Steps to Reproduce:&#10;&#10;Expected Result:&#10;&#10;Actual Result:&#10;&#10;Browser/System:&#10;</textarea>
+                    <textarea class="form-control" id="description" rows="16">Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                <a type="button" class="btn btn-primary btn-lg submit-btn blue" href="home.html">Submit</a>
             </form>
         </div>
 
