@@ -21,7 +21,7 @@
 }
 
 .dark-gray-text {
-    color: #C4C4C4;
+    color: #707070;
 }
 
 .darker-gray-text {
@@ -37,7 +37,7 @@
 }
 
 .rounded {
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 /* NAVBAR */
