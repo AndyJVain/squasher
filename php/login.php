@@ -44,7 +44,7 @@
        if($_SERVER["REQUEST_METHOD"] == "POST") {
           // username and password sent from form
 
-          $conn=oci_connect( 'psanchez','lmaogogo', '//dbserver.engr.scu.edu/db11g' );
+          $conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
           if(!$conn) {
               print "<br> connection failed:";
               exit;
