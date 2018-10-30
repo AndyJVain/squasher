@@ -53,19 +53,23 @@
           $username = $_POST["username"];
           $password = $_POST["password"];
 
-          $queryString = "SELECT password FROM squasher_user WHERE username = '$username' and password = '$password'";
+          $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
           $query = oci_parse($conn, $queryString);
+	
+	  oci_execute($query);
 
           echo($queryString);
 
-          $count = oci_num_rows ($query)
+	  $row = oci_fetch_array($query, OCI_BOTH);
 
-          echo($count);
+	  if($row[0] == 1){
+		echo("lit");
+	  }
 
-          if(count == 1){
-            $row = oci_fetch_array($query, OCI_BOTH)
-            echo "<font color='green'> $row[0] </font></br>";
-          }
+         // if($count == 1){
+           // $row = oci_fetch_array($query, OCI_BOTH);
+           // echo "<font color='green'> $row[0] </font></br>";
+         // }
 
           //$result = mysqli_query($db,$sql);
           //$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -75,7 +79,7 @@
 
           // If result matched $myusername and $mypassword, table row must be 1 row
 
-          if($count == 1) {
+          if($row[0] == 1) {
              //session_register("myusername");
              //$_SESSION['login_user'] = $username;
 
