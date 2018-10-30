@@ -24,7 +24,6 @@
                 <form method="post">
                     <div class="form-group">
                         <label for="username">Login</label>
-                        <?php echo $_POST["error"]; ?>
                         <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Username" name="username">
                     </div>
                     <div class="form-group">
@@ -55,38 +54,20 @@
 
           $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
           $query = oci_parse($conn, $queryString);
-	
-	  oci_execute($query);
 
-          echo($queryString);
+	        oci_execute($query);
 
-	  $row = oci_fetch_array($query, OCI_BOTH);
+	      $row = oci_fetch_array($query, OCI_BOTH);
 
-	  if($row[0] == 1){
-		echo("lit");
-	  }
+        if($row[0] == 1) {
+           //session_register("myusername");
+           //$_SESSION['login_user'] = $username;
 
-         // if($count == 1){
-           // $row = oci_fetch_array($query, OCI_BOTH);
-           // echo "<font color='green'> $row[0] </font></br>";
-         // }
-
-          //$result = mysqli_query($db,$sql);
-          //$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-          //$active = $row['active'];
-
-          //$count = mysqli_num_rows($result);
-
-          // If result matched $myusername and $mypassword, table row must be 1 row
-
-          if($row[0] == 1) {
-             //session_register("myusername");
-             //$_SESSION['login_user'] = $username;
-
-             header("location: home.php");
-          }else {
-             $error = "Your Login Name or Password is invalid";
-          }
+           header("location: home.html");
+        }else {
+           $error = "Your Login Name or Password is invalid";
+           echo $_POST["error"];
+        }
        }
     ?>
 
