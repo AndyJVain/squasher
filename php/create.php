@@ -10,7 +10,7 @@
 
   $binderVariable = 'Connor';
 
-  echo($username, $password, $email, $queryString);
+  echo($queryString);
 
   $conn=oci_connect( 'psanchez','lmaogogo', '//dbserver.engr.scu.edu/db11g' );
   if(!$conn) {
@@ -27,7 +27,7 @@
 
 ?>
 
-<a type="button" class="btn btn-secondary white" href="login.html">Return to Login</a>
+<a type="button" class="btn btn-secondary white" href="html/login.html">Return to Login</a>
 
 </body>
 </html>
