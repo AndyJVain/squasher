@@ -27,7 +27,7 @@
 
 ?>
 
-<a type="button" class="btn btn-secondary white" href="html/login.html">Return to Login</a>
+<a type="button" class="btn btn-secondary white" href="html/login.php">Return to Login</a>
 
 </body>
 </html>
