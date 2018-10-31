@@ -3,18 +3,23 @@
 
 
 
-<?php echo $_POST["product"]; ?><br>
-<?php echo $_POST["title"]; ?><br>
-<?php echo $_POST["bug-type"]; ?><br>
-<?php echo $_POST["rep"]; ?><br>
-<?php echo $_POST["description"]; ?><br>
-
 <?php
+
+	$product = $_POST["product"];
+	$title = $_POST["title"];
+	$bugType = $_POST["bug-type"];
+	$rep = $_POST["rep"];
+	$description = $_POST["description"];
+
+	//$username = $_POST["username"];
 	//todo:
-	//who gets assigned a report by default? could setup a trigger to handle it on DB side?
-	//What are the statuses?
+
 	//need to be given: REPORTER_EMAIL
+	//Needs to be from session.
 	$reporterEmail = 'ccarraher@scu.edu';
+
+	//by default, will assign to tester (pedro)
+	//Will setup a trigger to handle auto-assignment on DB side
 	$defaultAssigned = 'connor-carraher';
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -26,7 +31,7 @@
 		}
 	}
 
-	$getReportNumberQuery = "select REPORT_NUMBER from SQUASHER_COUNTER";
+	$getReportNumberQuery = "select MAX(REPORT_NUMBER) from SQUASHER_COUNTER";
 	$getDateQuery = "select SYSDATE from DUAL";
 
 	//Get current ReportNumber
@@ -35,6 +40,11 @@
 	$row_reportNumber = oci_fetch_array($query, OCI_BOTH);
 	$reportNumber = row_reportNumber[0] + 1;
 
+	//update ReportNumber
+	$updateReportNumberQuery = "insert into SQUASHER_COUNTER values($reportNumber+1)";
+	$query = oci_parse($conn, $updateReportNumberQuery);
+	oci_execute($query);
+
 	//Get SYSDATE
 	$query = oci_parse($conn, $getDateQuery);
 	oci_execute($query);
@@ -42,11 +52,13 @@
 	$sysDate = row_date[0];
 
 	//setup query for new report
-	$newReportQuery = "insert into SQUASHER_REPORTS values($reportNumber,$product,$title,$bug-type,$rep,$defaultAssigned,'PENDING BUG VERIFICATION',$reporterEmail,$sysDate)";
+	$newReportQuery = "insert into SQUASHER_REPORTS values($reportNumber,$product,$title,$bugType,$rep,$defaultAssigned,'PENDING BUG VERIFICATION',$reporterEmail,$sysDate)";
 	$query = oci_parse($conn, $newReportQuery);
 	oci_execute($query);
+
 	OCILogoff($conn);
 
+	header("Location: home.html");
 ?>
 
 
