@@ -52,9 +52,11 @@
 
 	//setup query for new report
 	$newReportQuery = "insert into SQUASHER_REPORTS values($reportNumber,$product,$title,$bugType,$rep,$defaultAssigned,'PENDING BUG VERIFICATION',$reporterEmail,$sysDate,$description)";
+	echo ($newReportQuery);
 	$query = oci_parse($conn, $newReportQuery);
 	oci_execute($query);
 
+	echo ('passed');
 	OCILogoff($conn);
 
 	//header("Location: ../html/home.html");
