@@ -22,6 +22,8 @@
 	//Will setup a trigger to handle auto-assignment on DB side
 	$defaultAssigned = 'connor-carraher';
 
+	$defaultState = "PENDING BUG VERIFICATION"
+
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$conn = oci_connect('psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
@@ -51,7 +53,7 @@
 	$sysDate = $row_date[0];
 
 	//setup query for new report
-	$newReportQuery = "insert into SQUASHER_REPORTS values($reportNumber,$product,$title,$bugType,$rep,$defaultAssigned,'PENDING BUG VERIFICATION',$reporterEmail,$sysDate,$description)";
+	$newReportQuery = "insert into SQUASHER_REPORTS values('$reportNumber','$product','$title','$bugType','$rep','$defaultAssigned','$defaultState','$reporterEmail','$sysDate','$description')";
 	echo ($newReportQuery);
 	$query = oci_parse($conn, $newReportQuery);
 	oci_execute($query);
