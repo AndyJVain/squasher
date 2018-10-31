@@ -46,12 +46,12 @@
 					//echo "<font color='green'> $row[0] </font></br>";
 					echo '<div class="bug-report rounded white">
 							<div class="report-left">
-									<p class="service dark-gray-text">'$row[0]'</p>
-									<p class="title">'$row[2]': '$row[1]'</p>
+									<p class="service dark-gray-text">',$row[0],'</p>
+									<p class="title">',$row[2],': ',$row[1],'</p>
 									<p class="id dark-gray-text">Submitted on '$row[4]'</p>
 							</div>
 							<div class="report-right">
-									<p class="status dark-gray-text">Current status: '$row[3]'</p>
+									<p class="status dark-gray-text">Current status: ',$row[3],'</p>
 							</div>
 					</div>';
 				}
