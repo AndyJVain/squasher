@@ -22,7 +22,7 @@
 	//Will setup a trigger to handle auto-assignment on DB side
 	$defaultAssigned = 'connor-carraher';
 
-	$defaultState = "PENDING BUG VERIFICATION"
+	$defaultState = "PENDING BUG VERIFICATION";
 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -62,7 +62,7 @@
 	OCILogoff($conn);
 
 	//header("Location: ../html/home.html");
-}
+	}
 ?>
 
 
