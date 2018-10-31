@@ -29,7 +29,6 @@
 		  print "<br> connection failed:";
 		  exit;
 		}
-	}
 
 	$getReportNumberQuery = "select MAX(REPORT_NUMBER) from SQUASHER_COUNTER";
 	$getDateQuery = "select SYSDATE from DUAL";
@@ -59,6 +58,7 @@
 	OCILogoff($conn);
 
 	header("Location: ../html/home.html");
+}
 ?>
 
 
