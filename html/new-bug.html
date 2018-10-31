@@ -19,7 +19,7 @@
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Report New Bug</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="../php/login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="darker-gray-text" href="login.html"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
 
@@ -33,10 +33,10 @@
         </div>
 
         <div class="form rounded light-gray">
-            <form action="../php/new-bug.php" method="post">
+            <form>
                 <div class="form-group blue-text">
                     <label for="select-product">Product</label>
-                    <select class="form-control" id="select-product" name="product">
+                    <select class="form-control" id="select-product">
                         <option value="" disabled selected>Select a product</option>
                         <option>Camino</option>
                         <option>CourseAvail</option>
@@ -47,11 +47,11 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="set-title">Title</label>
-                    <input type="text" class="form-control" id="set-title" placeholder="Enter a descriptive title for your report" name="title">
+                    <input type="text" class="form-control" id="set-title" placeholder="Enter a descriptive title for your report">
                 </div>
                 <div class="form-group blue-text">
                     <label for="select-type">Bug Type</label>
-                    <select class="form-control" id="select-type" name="bug-type">
+                    <select class="form-control" id="select-type">
                         <option value="" disabled selected>Select a bug type</option>
                         <option>Security</option>
                         <option>Crash/Hang/Data Loss</option>
@@ -64,20 +64,20 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="select-rep">Reproducability</label>
-                    <select class="form-control" id="select-rep" name="rep">
+                    <select class="form-control" id="select-rep">
                         <option value="" disabled selected>Select a reproducability</option>
                         <option>Always</option>
                         <option>Sometimes</option>
                         <option>Rarely</option>
                         <option>Unable</option>
-                        <option>I Did Not Try</option>
+                        <option>I Didn't Try</option>
                     </select>
                 </div>
                 <div class="form-group blue-text">
                     <label for="descritption">Description</label>
-                    <textarea class="form-control" id="description" rows="16" name="description">Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
+                    <textarea class="form-control" id="description" rows="16">Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
                 </div>
-                <input type="submit" class="btn btn-primary btn-lg submit-btn blue" value="Submit">
+                <a type="button" class="btn btn-primary btn-lg submit-btn blue" href="home.html">Submit</a>
             </form>
         </div>
 
