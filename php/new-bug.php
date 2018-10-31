@@ -41,11 +41,6 @@
 	$row_reportNumber = oci_fetch_array($query, OCI_BOTH);
 	$reportNumber = $row_reportNumber[0];
 
-	echo($reportNumber);
-	echo('\n');
-	echo($reportNumber + 1);
-	echo('\n');
-
 	//update ReportNumber
 	$updateReportNumberQuery = "insert into SQUASHER_COUNTER values($reportNumber+1)";
 	$query = oci_parse($conn, $updateReportNumberQuery);
@@ -64,12 +59,9 @@
 	oci_execute($query);
 
 
-	echo('\n');
-	echo('\n');
-	echo ('passed');
 	OCILogoff($conn);
 
-	//header("Location: ../html/home.html");
+	header("Location: ../html/home.html");
 	}
 ?>
 
