@@ -21,20 +21,56 @@
                 <img src="../statics/Code_Bug-512.png" class="img-fluid">
             </div>
             <div class="form light-gray">
-                <form>
+                <form method="post">
                     <div class="form-group">
                         <label for="username">Login</label>
-                        <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Username">
+                        <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Username" name="username">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" aria-describedby="Password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" aria-describedby="Password" placeholder="Password" name="password">
                     </div>
-                    <a type="button" class="btn btn-primary btn-block blue" href="home.html">Login</a>
+                    <input type="submit" class="btn btn-primary btn-block blue" value="Login">
                 </form>
                 <p class="create"><a href="../html/create.html">Create</a> a new account</p>
             </div>
         </div>
     </div>
+
+
+    <?php
+       session_start();
+
+       if($_SERVER["REQUEST_METHOD"] == "POST") {
+          // username and password sent from form
+
+          $conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
+          if(!$conn) {
+              print "<br> connection failed:";
+              exit;
+          }
+
+          $username = $_POST["username"];
+          $password = $_POST["password"];
+
+          $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
+          $query = oci_parse($conn, $queryString);
+
+	        oci_execute($query);
+
+	      $row = oci_fetch_array($query, OCI_BOTH);
+
+        if($row[0] == 1) {
+           //session_register("myusername");
+           //$_SESSION['login_user'] = $username;
+
+           header("location: ../html/home.html");
+        }else {
+           $error = "Your Login Name or Password is invalid";
+           echo $_POST["error"];
+        }
+       }
+    ?>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
