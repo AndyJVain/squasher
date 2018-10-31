@@ -37,7 +37,7 @@
 	$query = oci_parse($conn, $getReportNumberQuery);
 	oci_execute($query);
 	$row_reportNumber = oci_fetch_array($query, OCI_BOTH);
-	$reportNumber = row_reportNumber[0] + 1;
+	$reportNumber = $row_reportNumber[0] + 1;
 
 	//update ReportNumber
 	$updateReportNumberQuery = "insert into SQUASHER_COUNTER values($reportNumber+1)";
@@ -48,10 +48,10 @@
 	$query = oci_parse($conn, $getDateQuery);
 	oci_execute($query);
 	$row_date = oci_fetch_array($query, OCI_BOTH);
-	$sysDate = row_date[0];
+	$sysDate = $row_date[0];
 
 	//setup query for new report
-	$newReportQuery = "insert into SQUASHER_REPORTS values($reportNumber,$product,$title,$bugType,$rep,$defaultAssigned,'PENDING BUG VERIFICATION',$reporterEmail,$sysDate)";
+	$newReportQuery = "insert into SQUASHER_REPORTS values($reportNumber,$product,$title,$bugType,$rep,$defaultAssigned,'PENDING BUG VERIFICATION',$reporterEmail,$sysDate,$description)";
 	$query = oci_parse($conn, $newReportQuery);
 	oci_execute($query);
 
