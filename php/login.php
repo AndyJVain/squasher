@@ -63,7 +63,7 @@
            //session_register("myusername");
            //$_SESSION['login_user'] = $username;
 
-           header("location: ../html/home.html");
+           header("location: ../php/home.php");
         }else {
            $error = "Your Login Name or Password is invalid";
            echo $_POST["error"];
