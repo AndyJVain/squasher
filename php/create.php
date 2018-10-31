@@ -10,8 +10,6 @@
 
   $binderVariable = 'Connor';
 
-  echo($queryString);
-
   $conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
   if(!$conn) {
       print "<br> connection failed:";
@@ -21,13 +19,13 @@
   $query = oci_parse($conn, $queryString);
   oci_bind_by_name($query, ':title', $binderVariable);
   oci_execute($query);
-  OCILogoff($conn);
 
-  echo($binderVariable);
+
+  OCILogoff($conn);
 
 ?>
 
-<a type="button" class="btn btn-secondary white" href="html/login.php">Return to Login</a>
+<a type="button" class="btn btn-secondary white" href="../php/login.php">Return to Login</a>
 
 </body>
 </html>
