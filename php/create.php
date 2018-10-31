@@ -23,9 +23,7 @@
 
   OCILogoff($conn);
 
+  header("Location: ../php/login.php");
 ?>
-
-<a type="button" class="btn btn-secondary white" href="../php/login.php">Return to Login</a>
-
 </body>
 </html>
