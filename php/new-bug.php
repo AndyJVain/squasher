@@ -1,8 +1,6 @@
 <html>
 <body>
 
-
-
 <?php
 
 	$product = $_POST["product"];
@@ -63,10 +61,8 @@
 
 	header("Location: ../php/home.php");
 	}
+
 ?>
-
-
-
 
 </body>
 </html>
