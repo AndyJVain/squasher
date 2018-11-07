@@ -41,9 +41,23 @@
 						print "<br> connection failed:";
 						exit;
 				}
-				$query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
-				//oci_bind_by_name($query, ':title', $title);
-				oci_execute($query);
+
+        $query = oci_parse($conn, "select role from squasher_user where user = $_SESSION['username'];");
+        oci_execute($query);
+        $row = oci_fetch_array($query, OCI_BOTH);
+
+        if($row[0] == "REPORTER"){
+          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = $_SESSION['username'];");
+          oci_execute($query);
+        }
+        else if($row[0] == "MANAGER"){
+          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
+          oci_execute($query);
+        }
+        else{ //Dev, Tester
+          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = $_SESSION['username'];");
+          oci_execute($query);
+        }
 
 				while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
 					//echo "<font color='green'> $row[0] </font></br>";
