@@ -27,7 +27,7 @@
                         <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Username" name="username">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-controlq" id="password" aria-describedby="Password" placeholder="Password" name="password">
+                        <input type="password" class="form-control" id="password" aria-describedby="Password" placeholder="Password" name="password">
                     </div>
                     <input type="submit" class="btn btn-primary btn-block blue" value="Login">
                 </form>
