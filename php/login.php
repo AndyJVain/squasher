@@ -59,14 +59,15 @@
 
 	      $row = oci_fetch_array($query, OCI_BOTH);
 
-        if($row && $row[0] == 1) {
-           //verified user
-           $_SESSION['username'] = $username;
-
-           header("location: ../php/home.php");
-        }else {
+        if($row[0] == 0) {
            $error = "Your Login Name or Password is invalid";
            echo $_POST["error"];
+
+        }else {
+          //verified user
+          $_SESSION['username'] = $username;
+
+          header("location: ../php/home.php");
         }
        }
     ?>
