@@ -69,7 +69,7 @@
           //verified user
           $_SESSION['username'] = $username;
 
-          $query = oci_parse($conn, "select role from squasher_user where user = '$username'");
+          $query = oci_parse($conn, "select role from squasher_user where username = '$username'");
           oci_execute($query);
           $row = oci_fetch_array($query, OCI_BOTH);
           $_SESSION['role'] = $row[0];
