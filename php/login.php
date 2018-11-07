@@ -38,7 +38,9 @@
 
 
     <?php
+      if( isset($_SESSION)){
        session_destroy();
+     }
        session_start();
 
        if($_SERVER["REQUEST_METHOD"] == "POST") {
