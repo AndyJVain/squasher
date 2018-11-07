@@ -9,6 +9,6 @@ if ( isset( $_SESSION['username'] ) ) {
     // Let them access the "logged in only" pages
 } else {
     // Redirect them to the login page
-    header("Location: header("location: ../php/login.php");");
+    header("location: ../php/login.php");
 }
 ?>
