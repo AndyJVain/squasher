@@ -31,16 +31,8 @@ create table squasher_reports(
 	REPRODUCABILITY VARCHAR(50) check(UPPER(REPRODUCABILITY) in ('ALWAYS','SOMETIMES','RARELY','UNABLE','I DID NOT TRY') ) NOT NULL,
 	ASSIGNED VARCHAR(50) NOT NULL,
 	STATE VARCHAR(50) NOT NULL,
-	REPORTER_EMAIL VARCHAR(50) NOT NULL,
+	REPORTER_USERNAME VARCHAR(50) NOT NULL,
 	REPORT_DATE VARCHAR(50) NOT NULL,
 	DESCRIPTION VARCHAR(3000) NOT NULL
 );
-insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'c@scu.edu', '29-OCT-18','blablabla');
-
-
-
-
-
-
-
-
+insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'connor-carraher', '29-OCT-18','blablabla');

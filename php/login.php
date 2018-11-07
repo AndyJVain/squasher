@@ -59,7 +59,7 @@
 
 	      $row = oci_fetch_array($query, OCI_BOTH);
 
-        if($row[0] == 1) {
+        if($row && $row[0] == 1) {
            //verified user
            $_SESSION['username'] = $username;
 
