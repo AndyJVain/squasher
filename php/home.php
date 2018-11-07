@@ -42,12 +42,13 @@
 						exit;
 				}
 
-        $query = oci_parse($conn, "select role from squasher_user where user = ",$_SESSION['username'],";");
+        $username = $_SESSION['username'];
+        $query = oci_parse($conn, "select role from squasher_user where user = '$username'");
         oci_execute($query);
         $row = oci_fetch_array($query, OCI_BOTH);
 
         if($row[0] == "REPORTER"){
-          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = ",$_SESSION['username'],";");
+          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
           oci_execute($query);
         }
         else if($row[0] == "MANAGER"){
@@ -55,7 +56,7 @@
           oci_execute($query);
         }
         else{ //Dev, Tester
-          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = ",$_SESSION['username'],";");
+          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
           oci_execute($query);
         }
 
