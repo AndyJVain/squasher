@@ -51,7 +51,7 @@
           $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
           oci_execute($query);
         }
-        else if($row[0] == "MANAGER"){
+        elseif($row[0] == "MANAGER"){
           $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
           oci_execute($query);
         }
@@ -59,6 +59,7 @@
           $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
           oci_execute($query);
         }
+        print_r($row[0]);
 
 				while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
 					//echo "<font color='green'> $row[0] </font></br>";
