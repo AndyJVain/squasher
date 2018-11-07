@@ -19,7 +19,7 @@
 
 	//by default, will assign to tester (pedro)
 	//Will setup a trigger to handle auto-assignment on DB side
-	$defaultAssigned = 'connor-carraher';
+	$defaultAssigned = 'psanch';
 
 	$defaultState = "PENDING BUG VERIFICATION";
 
