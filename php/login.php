@@ -61,7 +61,7 @@
 
         if($row[0] == 0) {
            $error = "Your Login Name or Password is invalid";
-           echo $_POST["error"];
+           print_r($error);
 
         }else {
           //verified user
