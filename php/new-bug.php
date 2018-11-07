@@ -2,6 +2,7 @@
 <body>
 
 <?php
+	include 'session.php';
 
 	$product = $_POST["product"];
 	$title = $_POST["title"];
@@ -14,7 +15,7 @@
 
 	//need to be given: REPORTER_EMAIL
 	//Needs to be from session.
-	$reporterUsername = 'psanch';
+	$reporterUsername = $_SESSION['username'];
 
 	//by default, will assign to tester (pedro)
 	//Will setup a trigger to handle auto-assignment on DB side

@@ -11,7 +11,7 @@ create table squasher_user(
 insert into squasher_user values('psanch','pedrosanchezm97@gmail.com','lololol','TESTER');
 insert into squasher_user values('connor-carraher','ccarraher@scu.edu','cheeks','DEVELOPER');
 insert into squasher_user values('andyj','avainauskas@scu.edu','boosted','MANAGER');
-
+insert into squasher_user values('ronnie', 'rdanielson@scu.edu', 'cohesion', 'REPORTER');
 
 
 
