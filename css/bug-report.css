@@ -1,0 +1,69 @@
+.report {
+    padding: 10px;
+    margin-bottom: 100px;
+}
+
+.report-group {
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.report-group p {
+    font-size: 18px;
+    color: #000000;
+}
+
+.left p {
+    margin: auto;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .left p {
+        font-size: 18px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+}
+
+.next-state-container {
+    display: inline-block;
+    width: 100%;
+}
+
+.next-state-btn {
+    float: right;
+    font-size: 35px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.vertical-alignment-helper {
+    display: table;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width: inherit;
+    max-width: inherit;
+    /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height: inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events: all;
+}

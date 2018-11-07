@@ -32,3 +32,6 @@
 *.app
 
 *.DS_Store
+
+# Files
+/.atom-live-server.json
