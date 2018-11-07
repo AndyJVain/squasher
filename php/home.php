@@ -56,7 +56,6 @@
           $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
           oci_execute($query);
         }
-        print_r($_SESSION['role']);
 
 				while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
 					//echo "<font color='green'> $row[0] </font></br>";
