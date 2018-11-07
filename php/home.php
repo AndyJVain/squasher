@@ -34,7 +34,6 @@
 				<?php
 
         include 'session.php';
-        print_r($_SESSION);
 
 				$conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
 				if(!$conn) {
