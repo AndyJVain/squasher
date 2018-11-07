@@ -60,8 +60,8 @@
 	      $row = oci_fetch_array($query, OCI_BOTH);
 
         if($row[0] == 1) {
-           //session_register("myusername");
-           //$_SESSION['login_user'] = $username;
+           //verified user
+           $_SESSION['username'] = $username;
 
            header("location: ../php/home.php");
         }else {
