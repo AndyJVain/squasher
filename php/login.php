@@ -38,6 +38,9 @@
 
 
     <?php
+      if( isset($_SESSION)){
+       session_destroy();
+     }
        session_start();
 
        if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -59,14 +62,19 @@
 
 	      $row = oci_fetch_array($query, OCI_BOTH);
 
-        if($row[0] == 1) {
-           //session_register("myusername");
-           //$_SESSION['login_user'] = $username;
-
-           header("location: ../php/home.php");
-        }else {
+        if($row[0] == 0) {
            $error = "Your Login Name or Password is invalid";
-           echo $_POST["error"];
+           print_r($error);
+        }else {
+          //verified user
+          $_SESSION['username'] = $username;
+
+          $query = oci_parse($conn, "select role from squasher_user where username = '$username'");
+          oci_execute($query);
+          $row = oci_fetch_array($query, OCI_BOTH);
+          $_SESSION['role'] = $row[0];
+
+          header("location: ../php/home.php");
         }
        }
     ?>
