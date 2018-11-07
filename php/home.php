@@ -34,7 +34,7 @@
 				<?php
 
         include 'session.php';
-        echo '$_SESSION['username']';
+        echo "$_SESSION['username']";
 
 				$conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
 				if(!$conn) {
