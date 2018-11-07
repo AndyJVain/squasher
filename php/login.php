@@ -27,7 +27,7 @@
                         <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Username" name="username">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" aria-describedby="Password" placeholder="Password" name="password">
+                        <input type="password" class="form-controlq" id="password" aria-describedby="Password" placeholder="Password" name="password">
                     </div>
                     <input type="submit" class="btn btn-primary btn-block blue" value="Login">
                 </form>
@@ -55,11 +55,11 @@
           $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
           $query = oci_parse($conn, $queryString);
 
-	        oci_execute($query);
+	      oci_execute($query);
 
 	      $row = oci_fetch_array($query, OCI_BOTH);
 
-        if($row[0] == 1) {
+        if($row && $row[0] == 1) {
            //session_register("myusername");
            //$_SESSION['login_user'] = $username;
 
