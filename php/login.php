@@ -38,6 +38,7 @@
 
 
     <?php
+       session_destroy();
        session_start();
 
        if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -62,7 +63,6 @@
         if($row[0] == 0) {
            $error = "Your Login Name or Password is invalid";
            print_r($error);
-
         }else {
           //verified user
           $_SESSION['username'] = $username;
