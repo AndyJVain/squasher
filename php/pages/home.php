@@ -32,7 +32,7 @@
                   echo '<a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>';
                 }
                 else {
-                  echo ',$_SESSION['role'],';
+                  echo $_SESSION['role'];
                 }
               ?>
             </div>
