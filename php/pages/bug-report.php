@@ -18,7 +18,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../css/bug-report.css">
+    <link rel="stylesheet" href="../../css/bug-report.css">
 
     <title>Squasher - Bug Report</title>
 </head>
