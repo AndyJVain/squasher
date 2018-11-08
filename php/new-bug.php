@@ -33,7 +33,7 @@
         </div>
 
         <div class="form rounded light-gray">
-            <form action="..submit-bug.php" method="post">
+            <form action="submit-bug.php" method="post">
                 <div class="form-group blue-text">
                     <label for="select-product">Product</label>
                     <select class="form-control" id="select-product" name="product">
