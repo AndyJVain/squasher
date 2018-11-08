@@ -75,22 +75,22 @@
             <div class="report-group blue-text">
                 <label for="description">Description</label>
                 <p>',$row[4],'</p>
-            </div>'
+            </div>';
         ?>
             <div class="next-state-container">
                 <?php
                 if ($_SESSION['role'] == 'TESTER') {
                     echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#tester-modal">
                         &rarr;
-                    </button>'=
+                    </button>';
                 } elseif ($_SESSION['role'] == 'DEVELOPER') {
                     echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#developer-modal">
                         &rarr;
-                    </button>'
+                    </button>';
                 } elseif ($_SESSION['role'] == 'MANAGER') {
                     echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#manager-modal">
                         &rarr;
-                    </button>'
+                    </button>';
                 };
                 ?>
             </div>
