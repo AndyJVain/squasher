@@ -33,7 +33,7 @@
         <div class="bug-table rounded light-gray">
 				<?php
 
-        include 'session.php';
+        include '../session.php';
 
 				$conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
 				if(!$conn) {
