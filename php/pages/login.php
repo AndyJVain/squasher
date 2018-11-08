@@ -8,8 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/login.css">
 
     <title>Squasher - Login</title>
 </head>
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="center rounded light-gray">
             <div class="rounded dark-gray">
-                <img src="../statics/Code_Bug-512.png" class="img-fluid">
+                <img src="../../statics/homepage-icon.png" class="img-fluid">
             </div>
             <div class="form light-gray">
                 <form method="post">
@@ -31,7 +31,7 @@
                     </div>
                     <input type="submit" class="btn btn-primary btn-block blue" value="Login">
                 </form>
-                <p class="create"><a href="../html/create.html">Create</a> a new account</p>
+                <p class="create"><a href="../../html/create.html">Create</a> a new account</p>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
           $row = oci_fetch_array($query, OCI_BOTH);
           $_SESSION['role'] = $row[0];
 
-          header("location: ../php/home.php");
+          header("location: home.php");
         }
        }
     ?>

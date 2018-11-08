@@ -17,7 +17,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../css/bug-report.css">
 
     <title>Squasher - Bug Report</title>
@@ -28,7 +28,7 @@
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Squasher</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="../php/login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="darker-gray-text" href="login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
 
@@ -37,7 +37,7 @@
                 <p>Bug Report Form</p>
             </div>
             <div class="right">
-                <a type="button" class="btn btn-primary btn-lg blue" href="../php/home.php">My Bugs</a>
+                <a type="button" class="btn btn-primary btn-lg blue" href="home.php">My Bugs</a>
             </div>
         </div>
 
@@ -126,7 +126,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form rounded">
-                                <form action="../php/submit-bug.php" method="post">
+                                <form action="../submit-bug.php" method="post">
                                     <div class="form-group blue-text">
                                         <label for="select-product">Assign to Developer</label>
                                         <select class="form-control" id="select-product" name="product">

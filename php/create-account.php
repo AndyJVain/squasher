@@ -23,7 +23,7 @@
 
   OCILogoff($conn);
 
-  header("Location: ../php/login.php");
+  header("Location: pages/login.php");
 ?>
 </body>
 </html>

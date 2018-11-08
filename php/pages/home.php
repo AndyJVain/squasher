@@ -8,8 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/home.css">
 
     <title>Squasher - Home</title>
 </head>
@@ -19,7 +19,7 @@
         <nav class="navbar navbar-light">
             <div class="navbar-brand black-text">Squasher - My Bugs</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="../php/login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="darker-gray-text" href="login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
         <div class="header">
@@ -33,7 +33,7 @@
         <div class="bug-table rounded light-gray">
 				<?php
 
-        include 'session.php';
+        include '../session.php';
 
 				$conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
 				if(!$conn) {
