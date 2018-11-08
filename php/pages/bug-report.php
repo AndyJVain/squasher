@@ -50,7 +50,7 @@
             exit;
         }
         $bug_id = intval($_GET['bug_id']);
-        $state = intval($_GET['state']);
+        $state = $_GET['state'];
         echo $state;
         $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCABILITY, DESCRIPTION, STATE, REPORT_DATE from squasher_reports where BUG_ID = '$bug_id'");
 
