@@ -28,7 +28,7 @@
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Squasher</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="../php/login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="darker-gray-text" href="login.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
 
@@ -37,7 +37,7 @@
                 <p>Bug Report Form</p>
             </div>
             <div class="right">
-                <a type="button" class="btn btn-primary btn-lg blue" href="../php/home.php">My Bugs</a>
+                <a type="button" class="btn btn-primary btn-lg blue" href="home.php">My Bugs</a>
             </div>
         </div>
 

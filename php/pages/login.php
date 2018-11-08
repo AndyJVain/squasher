@@ -74,7 +74,7 @@
           $row = oci_fetch_array($query, OCI_BOTH);
           $_SESSION['role'] = $row[0];
 
-          header("location: ../php/home.php");
+          header("location: home.php");
         }
        }
     ?>

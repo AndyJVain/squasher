@@ -60,7 +60,7 @@
 
 	OCILogoff($conn);
 
-	header("Location: ../php/home.php");
+	header("Location: pages/home.php");
 	}
 
 ?>
