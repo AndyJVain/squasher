@@ -80,7 +80,6 @@
                 <input type="submit" class="btn btn-primary btn-lg submit-btn blue" value="Submit">
             </form>
         </div>
-
     </div>
 
     <!-- Optional JavaScript -->
