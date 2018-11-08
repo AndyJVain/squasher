@@ -31,7 +31,7 @@
                     </div>
                     <input type="submit" class="btn btn-primary btn-block blue" value="Login">
                 </form>
-                <p class="create"><a href="../html/create.html">Create</a> a new account</p>
+                <p class="create"><a href="../../html/create.html">Create</a> a new account</p>
             </div>
         </div>
     </div>
