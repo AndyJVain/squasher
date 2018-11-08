@@ -15,6 +15,9 @@
 </head>
 
 <body>
+  <?php
+    include '../session.php';
+  ?>
     <div class="container">
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Report New Bug</div>
