@@ -154,18 +154,17 @@
                                         <select class="form-control" id="select-product" name="product">
                                             <option value="" disabled selected>Select a developer</option>
                                             <?php
-
-                                                $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
-                                                if (!$conn) {
-                                                    print "<br> connection failed:";
-                                                    exit;
-                                                }
-                                                $query = oci_parse($conn, "select username from squasher_user where ROLE = 'DEVELOPER'");
-                                                oci_execute($query);
-                                                while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
-                                                    echo '<option>',$row[0],'</option>'
-                                                }
-                                                OCILogoff($conn);
+                                            $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+                                            if (!$conn) {
+                                                print "<br> connection failed:";
+                                                exit;
+                                            }
+                                            $query = oci_parse($conn, "select username from squasher_user where ROLE = 'DEVELOPER'");
+                                            oci_execute($query);
+                                            while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
+                                                echo '<option>',$row[0],'</option>';
+                                            }
+                                            OCILogoff($conn);
                                             ?>
                                         </select>
                                     </div>
