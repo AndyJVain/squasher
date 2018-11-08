@@ -1,14 +1,18 @@
 
 
+CODE TO GET A REPORT AND INFO FROM A BUG_ID:
+  select * from squasher_reports where BUG_ID = "GIVE ME THE BUG_ID FROM SOMEHOW"
 
 
+CODE TO GET STATE FROM BUG ID
+  select state from squasher_reports where BUG_ID = "Give me the bug id"
 
-
+  modals dont change
+  but they affect state differently based on past/current state
 
 
 get role
 select role from squasher_user where user = $_SESSION['username'];
-
 
 
 if theyre a reporter:
