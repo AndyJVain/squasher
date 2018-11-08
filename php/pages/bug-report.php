@@ -126,7 +126,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form rounded">
-                                <form action="../php/submit-bug.php" method="post">
+                                <form action="../submit-bug.php" method="post">
                                     <div class="form-group blue-text">
                                         <label for="select-product">Assign to Developer</label>
                                         <select class="form-control" id="select-product" name="product">
