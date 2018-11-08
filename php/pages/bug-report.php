@@ -56,37 +56,43 @@
         $row = oci_fetch_array($query, OCI_BOTH);
 
         echo '<div class="report rounded light-gray">
-        <div class="report-group blue-text">
-        <label for="product">Product</label>
-        <p>',$row[0],'</p>
-        </div>
-        <div class="report-group blue-text">
-            <label for="title">Title</label>
-            <p>',$bug_id,':',$row[1],'</p>
-        </div>
-        <div class="report-group blue-text">
-            <label for="bug-type">Bug Type</label>
-            <p>',$row[2],'</p>
-        </div>
-        <div class="report-group blue-text">
-            <label for="reproducability">Reproducability</label>
-            <p>',$row[3],'</p>
-        </div>
-        <div class="report-group blue-text">
-            <label for="description">Description</label>
-            <p>',$row[4],'</p>
-        </div>'
+            <div class="report-group blue-text">
+                <label for="product">Product</label>
+                <p>',$row[0],'</p>
+            </div>
+            <div class="report-group blue-text">
+                <label for="title">Title</label>
+                <p>',$bug_id,':',$row[1],'</p>
+            </div>
+            <div class="report-group blue-text">
+                <label for="bug-type">Bug Type</label>
+                <p>',$row[2],'</p>
+            </div>
+            <div class="report-group blue-text">
+                <label for="reproducability">Reproducability</label>
+                <p>',$row[3],'</p>
+            </div>
+            <div class="report-group blue-text">
+                <label for="description">Description</label>
+                <p>',$row[4],'</p>
+            </div>'
         ?>
             <div class="next-state-container">
-                <button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#tester-modal">
-                    &rarr;
-                </button>
-                <button type="button" class="btn btn-primary btn-lg blue" data-toggle="modal" data-target="#developer-modal">
-                    Developer
-                </button>
-                <button type="button" class="btn btn-primary btn-lg blue" data-toggle="modal" data-target="#manager-modal">
-                    Manager
-                </button>
+                <?php
+                if ($_SESSION['role'] == 'TESTER') {
+                    echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#tester-modal">
+                        &rarr;
+                    </button>'
+                } elseif ($_SESSION['role'] == 'DEVELOPER') {
+                    echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#developer-modal">
+                        &rarr;
+                    </button>'
+                } elseif ($_SESSION['role'] == 'MANAGER') {
+                    echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#manager-modal">
+                        &rarr;
+                    </button>'
+                }
+                ?>
             </div>
         </div>
 
