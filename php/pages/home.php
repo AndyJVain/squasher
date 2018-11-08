@@ -31,48 +31,45 @@
             </div>
         </div>
         <div class="bug-table rounded light-gray">
-				<?php
 
-        include '../session.php';
+            <?php
+            include '../session.php';
 
-				$conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
-				if(!$conn) {
-						print "<br> connection failed:";
-						exit;
-				}
+            $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+            if (!$conn) {
+                print "<br> connection failed:";
+                exit;
+            }
 
-        $username = $_SESSION['username'];
+            $username = $_SESSION['username'];
 
+            if ($_SESSION['role'] == "REPORTER") {
+                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
+                oci_execute($query);
+            } elseif ($_SESSION['role'] == "MANAGER") {
+                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
+                oci_execute($query);
+            } else { //Dev, Tester
+                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
+                oci_execute($query);
+            }
 
-        if($_SESSION['role'] == "REPORTER"){
-          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
-          oci_execute($query);
-        }
-        elseif($_SESSION['role'] == "MANAGER"){
-          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
-          oci_execute($query);
-        }
-        else{ //Dev, Tester
-          $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
-          oci_execute($query);
-        }
-
-				while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
-					//echo "<font color='green'> $row[0] </font></br>";
-					echo '<div class="bug-report rounded white">
-							<div class="report-left">
-									<p class="service dark-gray-text">',$row[0],'</p>
-									<p class="title"><a href="../php/page.php?bug_id=',$row[2],'">',$row[2],': ',$row[1],'</p>
-									<p class="id dark-gray-text">Submitted on ',$row[4],'</p>
-							</div>
-							<div class="report-right">
-									<p class="status dark-gray-text">Current status: ',$row[3],'</p>
-							</div>
-					</div>';
-				}
-				OCILogoff($conn);
-
-				?>
+            while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
+                //echo "<font color='green'> $row[0] </font></br>";
+                echo '<div class="bug-report rounded white">
+						<div class="report-left">
+							<p class="service dark-gray-text">',$row[0],'</p>
+							<p class="title"><a href="../php/page.php?bug_id=',$row[2],'">',$row[2],': ',$row[1],'</p>
+							<p class="id dark-gray-text">Submitted on ',$row[4],'</p>
+						</div>
+						<div class="report-right">
+							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
+						</div>
+                </div>';
+            }
+            OCILogoff($conn);
+            ?>
+            
         </div>
     </div>
 

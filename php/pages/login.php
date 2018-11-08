@@ -36,49 +36,47 @@
         </div>
     </div>
 
-
     <?php
-      if( isset($_SESSION)){
-       session_destroy();
-     }
-       session_start();
+    if (isset($_SESSION)) {
+        session_destroy();
+    }
+    session_start();
 
-       if($_SERVER["REQUEST_METHOD"] == "POST") {
-          // username and password sent from form
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // username and password sent from form
 
-          $conn=oci_connect( 'psanchez','a47k7S4QOi', '//dbserver.engr.scu.edu/db11g' );
-          if(!$conn) {
-              print "<br> connection failed:";
-              exit;
-          }
-
-          $username = $_POST["username"];
-          $password = $_POST["password"];
-
-          $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
-          $query = oci_parse($conn, $queryString);
-
-	        oci_execute($query);
-
-	      $row = oci_fetch_array($query, OCI_BOTH);
-
-        if($row[0] == 0) {
-           $error = "Your Login Name or Password is invalid";
-           print_r($error);
-        }else {
-          //verified user
-          $_SESSION['username'] = $username;
-
-          $query = oci_parse($conn, "select role from squasher_user where username = '$username'");
-          oci_execute($query);
-          $row = oci_fetch_array($query, OCI_BOTH);
-          $_SESSION['role'] = $row[0];
-
-          header("location: home.php");
+        $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+        if (!$conn) {
+            print "<br> connection failed:";
+            exit;
         }
-       }
-    ?>
 
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
+        $query = oci_parse($conn, $queryString);
+
+        oci_execute($query);
+
+        $row = oci_fetch_array($query, OCI_BOTH);
+
+        if ($row[0] == 0) {
+            $error = "Your Login Name or Password is invalid";
+            print_r($error);
+        } else {
+            //verified user
+            $_SESSION['username'] = $username;
+
+            $query = oci_parse($conn, "select role from squasher_user where username = '$username'");
+            oci_execute($query);
+            $row = oci_fetch_array($query, OCI_BOTH);
+            $_SESSION['role'] = $row[0];
+
+            header("location: home.php");
+        }
+    }
+    ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
