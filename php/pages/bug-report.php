@@ -28,7 +28,7 @@
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Squasher</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             </ul>
         </nav>
 
