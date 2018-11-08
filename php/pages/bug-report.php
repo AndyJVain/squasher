@@ -41,27 +41,42 @@
             </div>
         </div>
 
-        <div class="report rounded light-gray">
-            <div class="report-group blue-text">
-                <label for="product">Product</label>
-                <p>eCampus</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="title">Title</label>
-                <p>#001: Cannot submit tuition payment</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="bug-type">Bug Type</label>
-                <p>Serious Bug</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="reproducability">Reproducability</label>
-                <p>Always</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="description">Description</label>
-                <p>Summary:<br><br>Steps to Reproduce:<br><br>Expected Result:<br><br>Actual Result:<br><br>Browser/System:</p>
-            </div>
+        <?php
+        include '../session.php';
+
+        $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+        if (!$conn) {
+            print "<br> connection failed:";
+            exit;
+        }
+        $bug_id = intval($_GET['bug_id']);
+        $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCABILITY, DESCRIPTION, STATE, REPORT_DATE from squasher_reports where BUG_ID = '$bug_id'");
+
+        oci_execute($query);
+        $row = oci_fetch_array($query, OCI_BOTH);
+
+        echo '<div class="report rounded light-gray">
+        <div class="report-group blue-text">
+        <label for="product">Product</label>
+        <p>',$row[0],'</p>
+        </div>
+        <div class="report-group blue-text">
+            <label for="title">Title</label>
+            <p>',$bug_id,':',$row[1],'</p>
+        </div>
+        <div class="report-group blue-text">
+            <label for="bug-type">Bug Type</label>
+            <p>',$row[2],'</p>
+        </div>
+        <div class="report-group blue-text">
+            <label for="reproducability">Reproducability</label>
+            <p>',$row[3],'</p>
+        </div>
+        <div class="report-group blue-text">
+            <label for="description">Description</label>
+            <p>',$row[4],'</p>
+        </div>'
+        ?>
             <div class="next-state-container">
                 <button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#tester-modal">
                     &rarr;
