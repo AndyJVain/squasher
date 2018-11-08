@@ -28,6 +28,8 @@
             </div>
             <div class="right">
               <?php
+                include '../session.php';
+
                 if($_SESSION['role'] == 'REPORTER'){
                   echo '<a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>';
                 }
@@ -41,6 +43,7 @@
 
             <?php
             include '../session.php';
+
 
             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
             if (!$conn) {
