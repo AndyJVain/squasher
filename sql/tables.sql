@@ -22,7 +22,7 @@ create table squasher_counter(
 	REPORT_NUMBER NUMBER
 );
 
-insert into squasher_counter values(1);
+insert into squasher_counter values(0);
 
 drop table squasher_reports;
 create table squasher_reports(
@@ -37,4 +37,4 @@ create table squasher_reports(
 	REPORT_DATE VARCHAR(50) NOT NULL,
 	DESCRIPTION VARCHAR(3000) NOT NULL
 );
-insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'connor-carraher', '29-OCT-18','blablabla');
+--insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'connor-carraher', '29-OCT-18','blablabla');
