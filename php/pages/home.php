@@ -27,7 +27,14 @@
                 <input class="form-control" type="text" placeholder="Filter Issues" aria-label="Search">
             </div>
             <div class="right">
-                <a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>
+              <?php
+                if($_SESSION['role'] == 'REPORTER'){
+                  echo '<a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>';
+                }
+                else {
+                  echo ',$_SESSION['role'],';
+                }
+              ?>
             </div>
         </div>
         <div class="bug-table rounded light-gray">
