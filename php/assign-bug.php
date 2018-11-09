@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($state == "PENDING BUG VERIFICATION") {
           if (isset($_POST['not_verified'])) {
               $queryState = "update squasher_reports set state = 'BUG VERIFICATION FAILED' where bug_id = $bug_id";
+              $queryAssigned = "update squasher_reports set ASSIGNED = 'failed' where bug_id = $bug_id";
               $query = oci_parse($conn, $queryState);
               oci_execute($query);
           }
