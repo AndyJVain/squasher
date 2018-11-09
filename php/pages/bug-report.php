@@ -113,7 +113,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <input type="submit" name="not_verified" class="btn btn-warning" value="Not Verified">
                                 <input type="submit" name="verified" class="btn btn-primary blue" value="Verified">
-                                <input type="hidden" name="bug-id" value="<?php echo intval($_GET['bug_id']); ?>">
+                                <input type="hidden" name="bug_id" value="<?php echo intval($_GET['bug_id']); ?>">
                                 <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
                             </form>
                         </div>
@@ -136,7 +136,7 @@
                             <form action="../assign-bug.php" method="post">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                 <input type="submit" class="btn btn-primary blue" value="Development Complete">
-                                <input type="hidden" name="bug-id" value="<?php echo intval($_GET['bug_id']); ?>">
+                                <input type="hidden" name="bug_id" value="<?php echo intval($_GET['bug_id']); ?>">
                                 <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
                             </form>
                         </div>
@@ -180,7 +180,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                         <input type="submit" class="btn btn-primary blue" value="Assign">
-                                        <input type="hidden" name="bug-id" value="<?php echo intval($_GET['bug_id']); ?>">
+                                        <input type="hidden" name="bug_id" value="<?php echo intval($_GET['bug_id']); ?>">
                                         <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
                                         <!-- <button type="button" class="btn btn-primary blue">Assign</button> -->
                                     </div>

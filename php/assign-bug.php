@@ -4,7 +4,7 @@
 <?php
 include 'session.php';
 
-$bug_id = $_POST['bug-id'];
+$bug_id = $_POST['bug_id'];
 $state = $_POST['state'];
 
 // echo $bug_id;
