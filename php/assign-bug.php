@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $assigned_developer = $_POST["assigned_developer"];
 
         $queryState = "update squasher_reports set state = 'PENDING FIX DEVELOPMENT' where bug_id = $bug_id";
-        $queryAssigned = "update squasher_reports set ASSIGNED = $assigned_developer where bug_id = $bug_id";
+        $queryAssigned = "update squasher_reports set ASSIGNED = '$assigned_developer' where bug_id = $bug_id";
 
         $query = oci_parse($conn, $queryState);
         oci_execute($query);
