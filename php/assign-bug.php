@@ -5,8 +5,12 @@
 
 include 'session.php';
 
-$bug_id = $_POST['bug_id'];
+$bug_id = $_POST['bug-id'];
 $state = $_POST['state'];
+
+echo $bug_id;
+echo $state;
+
 $role = $_SESSION['role'];
 $username = $_SESSION['username'];
 
