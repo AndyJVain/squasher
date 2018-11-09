@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($role == "DEVELOPER") {
 
         $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION' where bug_id = $bug_id";
-        $queryAssigned = "update squasher_reports set ASSIGNED = assigner where bug_id = $bug_id";
+        $queryAssigned = "update squasher_reports set ASSIGNED = 'assigner' where bug_id = $bug_id";
 
         $query = oci_parse($conn, $queryState);
         oci_execute($query);
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           elseif (isset($_POST['verified'])) {
               # Verified-button was clicked
               $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $bug_id";
-              $queryAssigned = "update squasher_reports set ASSIGNED = andyj where bug_id = $bug_id";
+              $queryAssigned = "update squasher_reports set ASSIGNED = 'andyj' where bug_id = $bug_id";
 
               $query = oci_parse($conn, $queryState);
               oci_execute($query);
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST['not_verified'])) {
                 # Not Verified-button was clicked
                 $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $bug_id";
-                $queryAssigned = "update squasher_reports set ASSIGNED = andyj where bug_id = $bug_id";
+                $queryAssigned = "update squasher_reports set ASSIGNED = 'andyj' where bug_id = $bug_id";
 
                 $query = oci_parse($conn, $queryState);
                 oci_execute($query);
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 # Verified-button was clicked
                 # Verified-button was clicked
                 $queryState = "update squasher_reports set state = 'DONE' where bug_id = $bug_id";
-                $queryAssigned = "update squasher_reports set ASSIGNED = done where bug_id = $bug_id";
+                $queryAssigned = "update squasher_reports set ASSIGNED = 'done' where bug_id = $bug_id";
 
                 $query = oci_parse($conn, $queryState);
                 oci_execute($query);
