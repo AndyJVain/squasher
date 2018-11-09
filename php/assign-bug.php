@@ -37,7 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if (isset($_POST['not_verified'])) {
               $queryState = "update squasher_reports set state = 'BUG VERIFICATION FAILED' where bug_id = $bug_id";
               $queryAssigned = "update squasher_reports set ASSIGNED = 'failed' where bug_id = $bug_id";
+
               $query = oci_parse($conn, $queryState);
+              oci_execute($query);
+
+              $query = oci_parse($conn, $queryAssigned);
               oci_execute($query);
           }
           elseif (isset($_POST['verified'])) {
