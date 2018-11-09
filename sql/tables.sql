@@ -5,7 +5,7 @@ create table squasher_user(
 	USERNAME varchar(50) PRIMARY KEY,
 	EMAIL varchar(50) NOT NULL,
 	PASSWORD varchar(50) NOT NULL,
-	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER')) NOT NULL
+	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL
  );
 
 insert into squasher_user values('psanch','pedrosanchezm97@gmail.com','lololol','TESTER');
@@ -15,6 +15,11 @@ insert into squasher_user values('victor','vyu@scu.edu','cheeks','DEVELOPER');
 insert into squasher_user values('mason','mbruce@scu.edu','cheeks','DEVELOPER');
 insert into squasher_user values('andyj','avainauskas@scu.edu','boosted','MANAGER');
 insert into squasher_user values('ronnie', 'rdanielson@scu.edu', 'cohesion', 'REPORTER');
+
+
+insert into squasher_user values('assigner','d@scu.edu','cheeks','DUMMY');
+insert into squasher_user values('failed','bsmith3@scu.edu','cheeks','DUMMY');
+insert into squasher_user values('done','bsmith3@scu.edu','cheeks','DUMMY');
 
 drop table squasher_counter;
 create table squasher_counter(

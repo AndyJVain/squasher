@@ -50,8 +50,7 @@
             exit;
         }
         $bug_id = intval($_GET['bug_id']);
-        $state = $_GET['state'];
-        echo $state;
+
         $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCABILITY, DESCRIPTION, STATE, REPORT_DATE from squasher_reports where BUG_ID = '$bug_id'");
 
         oci_execute($query);
@@ -90,7 +89,7 @@
                     echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#developer-modal">
                         &rarr;
                     </button>';
-                } elseif ($_SESSION['role'] == 'MANAGER') {
+                } elseif ($_SESSION['role'] == 'MANAGER' && $_GET['state'] == 'PENDING DEVELOPER ASSIGNMENT') {
                     echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#manager-modal">
                         &rarr;
                     </button>';
@@ -110,9 +109,13 @@
                              <h4 class="modal-title" id="myModalLabel">Next State</h4>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-warning">Not Verified</button>
-                            <button type="button" class="btn btn-primary blue">Verified</button>
+                            <form action="../assign-bug.php" method="post">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <input type="submit" name="not_verified" class="btn btn-warning" value="Not Verified">
+                                <input type="submit" name="verified" class="btn btn-primary blue" value="Verified">
+                                <input type="hidden" name="bug-id" value="<?php echo intval($_GET['bug_id']); ?>">
+                                <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -130,8 +133,12 @@
                              <h4 class="modal-title" id="myModalLabel">Next State</h4>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary blue">Development Complete</button>
+                            <form action="../assign-bug.php" method="post">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary blue" value="Development Complete">
+                                <input type="hidden" name="bug-id" value="<?php echo intval($_GET['bug_id']); ?>">
+                                <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -150,10 +157,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="form rounded">
-                                <form action="../submit-bug.php" method="post">
+                                <form action="../assign-bug.php" method="post">
                                     <div class="form-group blue-text">
-                                        <label for="select-product">Assign to Developer</label>
-                                        <select class="form-control" id="select-product" name="product">
+                                        <label for="select-developer">Assign to Developer</label>
+                                        <select class="form-control" id="select-developer" name="assigned_developer">
                                             <option value="" disabled selected>Select a developer</option>
                                             <?php
                                             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
@@ -170,11 +177,14 @@
                                             ?>
                                         </select>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-primary blue" value="Assign">
+                                        <input type="hidden" name="bug-id" value="<?php echo intval($_GET['bug_id']); ?>">
+                                        <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
+                                        <!-- <button type="button" class="btn btn-primary blue">Assign</button> -->
+                                    </div>
                                 </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary blue">Assign</button>
                         </div>
                     </div>
                 </div>
