@@ -66,9 +66,9 @@
                     </select>
                 </div>
                 <div class="form-group blue-text">
-                    <label for="select-reproducability">Reproducability</label>
+                    <label for="select-reproducibility">Reproducibility</label>
                     <select class="form-control" id="select-rep" name="rep">
-                        <option value="" disabled selected>Select a reproducability</option>
+                        <option value="" disabled selected>Select a reproducibility</option>
                         <option>Always</option>
                         <option>Sometimes</option>
                         <option>Rarely</option>

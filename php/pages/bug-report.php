@@ -51,7 +51,7 @@
         }
         $bug_id = intval($_GET['bug_id']);
 
-        $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCABILITY, DESCRIPTION, STATE, REPORT_DATE from squasher_reports where BUG_ID = '$bug_id'");
+        $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCIBILITY, DESCRIPTION, STATE, REPORT_DATE from squasher_reports where BUG_ID = '$bug_id'");
 
         oci_execute($query);
         $row = oci_fetch_array($query, OCI_BOTH);
@@ -70,7 +70,7 @@
                 <p>',$row[2],'</p>
             </div>
             <div class="report-group blue-text">
-                <label for="reproducability">Reproducability</label>
+                <label for="reproducibility">Reproducibility</label>
                 <p>',$row[3],'</p>
             </div>
             <div class="report-group blue-text">
