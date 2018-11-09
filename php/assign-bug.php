@@ -7,8 +7,8 @@ include 'session.php';
 $bug_id = $_POST['bug-id'];
 $state = $_POST['state'];
 
-echo $bug_id;
-echo $state;
+// echo $bug_id;
+// echo $state;
 
 $role = $_SESSION['role'];
 $username = $_SESSION['username'];
@@ -94,6 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     OCILogoff($conn);
+
+    header("location: ../php/pages/home.php");
 }
 ?>
 
