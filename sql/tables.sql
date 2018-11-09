@@ -16,7 +16,6 @@ insert into squasher_user values('mason','mbruce@scu.edu','cheeks','DEVELOPER');
 insert into squasher_user values('andyj','avainauskas@scu.edu','boosted','MANAGER');
 insert into squasher_user values('ronnie', 'rdanielson@scu.edu', 'cohesion', 'REPORTER');
 
-
 insert into squasher_user values('assigner','d@scu.edu','cheeks','DUMMY');
 insert into squasher_user values('failed','bsmith3@scu.edu','cheeks','DUMMY');
 insert into squasher_user values('done','bsmith3@scu.edu','cheeks','DUMMY');
