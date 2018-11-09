@@ -10,11 +10,6 @@ $bugType = $_POST["bug-type"];
 $rep = $_POST["rep"];
 $description = $_POST["description"];
 
-//$username = $_POST["username"];
-//todo:
-
-//need to be given: REPORTER_EMAIL
-//Needs to be from session.
 $reporterUsername = $_SESSION['username'];
 
 //by default, will assign to tester (pedro)

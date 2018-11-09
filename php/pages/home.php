@@ -27,13 +27,21 @@
                 <input class="form-control" type="text" placeholder="Filter Issues" aria-label="Search">
             </div>
             <div class="right">
-                <a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>
+              <?php
+                include '../session.php';
+
+                if($_SESSION['role'] == 'REPORTER'){
+                  echo '<a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>';
+                }
+                else {
+                  echo $_SESSION['role'];
+                }
+              ?>
             </div>
         </div>
         <div class="bug-table rounded light-gray">
 
             <?php
-            include '../session.php';
 
             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
             if (!$conn) {
@@ -56,15 +64,16 @@
 
             while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
                 //echo "<font color='green'> $row[0] </font></br>";
-                echo '<div class="bug-report rounded white">
-						<div class="report-left">
-							<p class="service dark-gray-text">',$row[0],'</p>
-							<p class="title"><a href="../php/page.php?bug_id=',$row[2],'">',$row[2],': ',$row[1],'</p>
-							<p class="id dark-gray-text">Submitted on ',$row[4],'</p>
-						</div>
-						<div class="report-right">
-							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
-						</div>
+                echo '
+                <div class="bug-report rounded white">
+          						<div class="report-left">
+          							<p class="service dark-gray-text">',$row[0],'</p>
+          							<p class="title"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p>
+          							<p class="id dark-gray-text">Submitted on ',$row[4],'</p>
+          						</div>
+          						<div class="report-right">
+          							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
+        						</div>
                 </div>';
             }
             OCILogoff($conn);
