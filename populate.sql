@@ -24,3 +24,23 @@ els3 theyre not a reporter
   search for any reports assigned to them
 
   select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = $_SESSION['username'];
+
+
+
+-----
+
+
+--change state to "BUG VERIFICATION FAILED"
+$queryString = "update squasher_reports set state = 'BUG VERIFICATION FAILED' where bug_id = $_GET['bug_id']";
+
+--change state to PENDING DEVELOPER ASSIGNMENT
+$queryString = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $_GET['bug_id']"
+
+--change state to PENDING FIX VERIFICATION
+$queryString = "update squasher_reports set state = 'PENDING FIX VERIFICATION' where bug_id = $_GET['bug_id']"
+
+--change state to DONE
+$queryString = "update squasher_reports set state = 'DONE' where bug_id = $_GET['bug_id']"
+
+$query = oci_parse($conn, $queryString);
+oci_execute($query);
