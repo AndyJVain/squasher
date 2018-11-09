@@ -5,8 +5,8 @@
 
 include 'session.php';
 
-$bug_id = $_POST["bug_id"];
-$state = $_POST["state"];
+$bug_id = $_POST['bug_id'];
+$state = $_POST['state'];
 $role = $_SESSION['role'];
 $username = $_SESSION['username'];
 
