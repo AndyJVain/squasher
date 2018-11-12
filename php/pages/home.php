@@ -39,13 +39,13 @@
                         <button class="btn btn-primary dropdown-toggle blue" type="button" data-toggle="dropdown">Filter by status
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="href="../pages/home.php?filter=PENDING BUG VERIFICATION">Pending Bug Verification</a></li>
-                            <li><a href="href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">Pending Developer Assignment</a></li>
-                            <li><a href="href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">In Development</a></li>
-                            <li><a href="href="../pages/home.php?filter=PENDING FIX VERIFICATION">Pending Fix Verification</a></li>
-                            <li><a href="href="../pages/home.php?filter=BUG VERIFICATION FAILED">Bug Verification Failed</a></li>
-                            <li><a href="href="../pages/home.php?filter=DONE">Done</a></li>
-                            <li><a href="href="../pages/home.php?filter=ALL">All</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING BUG VERIFICATION">Pending Bug Verification</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">Pending Developer Assignment</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">In Development</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING FIX VERIFICATION">Pending Fix Verification</a></li>
+                            <li><a href="../pages/home.php?filter=BUG VERIFICATION FAILED">Bug Verification Failed</a></li>
+                            <li><a href="../pages/home.php?filter=DONE">Done</a></li>
+                            <li><a href="../pages/home.php?filter=ALL">All</a></li>
                         </ul>
                     </div>
                 </div>
