@@ -23,26 +23,40 @@
             </ul>
         </nav>
         <div class="header">
-            <div class="left">
-                <input class="form-control" type="text" placeholder="Filter Issues" aria-label="Search">
-            </div>
-            <div class="right">
-              <?php
-                include '../session.php';
+            <?php
+            include '../session.php';
 
-                if($_SESSION['role'] == 'REPORTER'){
-                  echo '<a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>';
-                }
-                else {
-                  echo $_SESSION['role'];
-                }
-              ?>
-            </div>
+            if($_SESSION['role'] == 'REPORTER'){
+                echo '<div class="left">
+                </div>
+                <div class="right">
+                    <a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>
+                </div>';
+            }
+            else {
+                echo '<div class="left">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle blue" type="button" data-toggle="dropdown">Filter by status
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Pending Bug Verification</a></li>
+                            <li><a href="#">Pending Developer Assignment</a></li>
+                            <li><a href="#">In Development</a></li>
+                            <li><a href="#">Pending Fix Verification</a></li>
+                            <li><a href="#">Bug Verification Failed</a></li>
+                            <li><a href="#">Done</a></li>
+                            <li><a href="#">All</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <p class="role-label">',$_SESSION['role'],'</p>
+                </div>';
+            }
+            ?>
         </div>
         <div class="bug-table rounded light-gray">
-
             <?php
-
             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
             if (!$conn) {
                 print "<br> connection failed:";
@@ -63,7 +77,6 @@
             }
 
             while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
-                //echo "<font color='green'> $row[0] </font></br>";
                 echo '
                 <div class="bug-report rounded white">
           						<div class="report-left">
