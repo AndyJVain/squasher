@@ -70,7 +70,8 @@
                     $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
                     oci_execute($query);
                 } else {
-                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where STATE = '$_GET['filter']'");
+                    $filter = $_GET['filter'];
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where STATE = '$filter'");
                     oci_execute($query);
                 }
             } else {
