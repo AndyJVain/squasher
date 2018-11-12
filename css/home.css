@@ -8,6 +8,12 @@
     }
 }
 
+.role-label {
+    font-size: 22px;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
 .bug-table {
     height: auto;
     width: auto;
