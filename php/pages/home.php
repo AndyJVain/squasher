@@ -79,7 +79,7 @@
                     $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
                     oci_execute($query);
                 } elseif ($_SESSION['role'] == "MANAGER") {
-                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where STATE = PENDING DEVELOPER ASSIGNMENT");
                     oci_execute($query);
                 } else { //Dev, Tester
                     $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
