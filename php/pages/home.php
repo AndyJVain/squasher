@@ -39,13 +39,13 @@
                         <button class="btn btn-primary dropdown-toggle blue" type="button" data-toggle="dropdown">Filter by status
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Pending Bug Verification</a></li>
-                            <li><a href="#">Pending Developer Assignment</a></li>
-                            <li><a href="#">In Development</a></li>
-                            <li><a href="#">Pending Fix Verification</a></li>
-                            <li><a href="#">Bug Verification Failed</a></li>
-                            <li><a href="#">Done</a></li>
-                            <li><a href="#">All</a></li>
+                            <li><a href="href="../pages/home.php?filter=PENDING BUG VERIFICATION">Pending Bug Verification</a></li>
+                            <li><a href="href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">Pending Developer Assignment</a></li>
+                            <li><a href="href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">In Development</a></li>
+                            <li><a href="href="../pages/home.php?filter=PENDING FIX VERIFICATION">Pending Fix Verification</a></li>
+                            <li><a href="href="../pages/home.php?filter=BUG VERIFICATION FAILED">Bug Verification Failed</a></li>
+                            <li><a href="href="../pages/home.php?filter=DONE">Done</a></li>
+                            <li><a href="href="../pages/home.php?filter=ALL">All</a></li>
                         </ul>
                     </div>
                 </div>
@@ -65,15 +65,25 @@
 
             $username = $_SESSION['username'];
 
-            if ($_SESSION['role'] == "REPORTER") {
-                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
-                oci_execute($query);
-            } elseif ($_SESSION['role'] == "MANAGER") {
-                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
-                oci_execute($query);
-            } else { //Dev, Tester
-                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
-                oci_execute($query);
+            if (isset($_GET['filter'])) {   // Query for filtered bug state
+                if ($_GET['filter'] == "ALL") {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
+                    oci_execute($query);
+                } else {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where STATE = '$_GET['filter']'");
+                    oci_execute($query);
+                }
+            } else {
+                if ($_SESSION['role'] == "REPORTER") {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
+                    oci_execute($query);
+                } elseif ($_SESSION['role'] == "MANAGER") {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
+                    oci_execute($query);
+                } else { //Dev, Tester
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
+                    oci_execute($query);
+                }
             }
 
             while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
