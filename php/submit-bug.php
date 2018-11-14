@@ -14,7 +14,7 @@ $reporterUsername = $_SESSION['username'];
 
 //by default, will assign to tester (pedro)
 //Will setup a trigger to handle auto-assignment on DB side
-$defaultAssigned = 'psanch';
+$defaultAssigned = 'tester';
 
 $defaultState = "PENDING BUG VERIFICATION";
 
