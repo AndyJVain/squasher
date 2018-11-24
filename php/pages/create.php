@@ -79,7 +79,7 @@
 
                     $row = oci_fetch_array($query, OCI_BOTH);
 
-                    if ($row[0] == 0) {
+                    if ($row[0] != 0) {
                         echo '<p class="center-text error-message">Username Already Exists</p>';
                     } else {
                         $queryString = "insert into squasher_user values ('$username', '$email', '$password', 'REPORTER')";
