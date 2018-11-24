@@ -31,7 +31,7 @@
                     </div>
                     <input type="submit" class="btn btn-primary btn-block blue" value="Login">
                 </form>
-                <p class="center-text"><a href="../../html/create.html">Create</a> a new account</p>
+                <p class="center-text"><a href="create.php">Create</a> a new account</p>
 
                 <?php
                 if (isset($_SESSION['username'])) {
