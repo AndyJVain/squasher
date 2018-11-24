@@ -23,26 +23,40 @@
             </ul>
         </nav>
         <div class="header">
-            <div class="left">
-                <input class="form-control" type="text" placeholder="Filter Issues" aria-label="Search">
-            </div>
-            <div class="right">
-              <?php
-                include '../session.php';
+            <?php
+            include '../session.php';
 
-                if($_SESSION['role'] == 'REPORTER'){
-                  echo '<a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>';
-                }
-                else {
-                  echo $_SESSION['role'];
-                }
-              ?>
-            </div>
+            if($_SESSION['role'] == 'REPORTER'){
+                echo '<div class="left">
+                </div>
+                <div class="right">
+                    <a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>
+                </div>';
+            }
+            else {
+                echo '<div class="left">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle blue" type="button" data-toggle="dropdown">Filter by status
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="../pages/home.php?filter=PENDING BUG VERIFICATION">Pending Bug Verification</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">Pending Developer Assignment</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING FIX DEVELOPMENT">Pending Fix Development</a></li>
+                            <li><a href="../pages/home.php?filter=PENDING FIX VERIFICATION">Pending Fix Verification</a></li>
+                            <li><a href="../pages/home.php?filter=BUG VERIFICATION FAILED">Bug Verification Failed</a></li>
+                            <li><a href="../pages/home.php?filter=DONE">Done</a></li>
+                            <li><a href="../pages/home.php?filter=ALL">All</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <p class="role-label">',$_SESSION['role'],'</p>
+                </div>';
+            }
+            ?>
         </div>
         <div class="bug-table rounded light-gray">
-
             <?php
-
             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
             if (!$conn) {
                 print "<br> connection failed:";
@@ -51,19 +65,29 @@
 
             $username = $_SESSION['username'];
 
-            if ($_SESSION['role'] == "REPORTER") {
-                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
-                oci_execute($query);
-            } elseif ($_SESSION['role'] == "MANAGER") {
-                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
-                oci_execute($query);
-            } else { //Dev, Tester
-                $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
-                oci_execute($query);
+            if (isset($_GET['filter'])) {   // Query for filtered bug state
+                if ($_GET['filter'] == "ALL") {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports");
+                    oci_execute($query);
+                } else {
+                    $filter = $_GET['filter'];
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where STATE = '$filter'");
+                    oci_execute($query);
+                }
+            } else {
+                if ($_SESSION['role'] == "REPORTER") {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where REPORTER_USERNAME = '$username'");
+                    oci_execute($query);
+                } elseif ($_SESSION['role'] == "MANAGER") {
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where STATE = 'PENDING DEVELOPER ASSIGNMENT'");
+                    oci_execute($query);
+                } else { //Dev, Tester
+                    $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_ID, STATE, REPORT_DATE from squasher_reports where ASSIGNED = '$username'");
+                    oci_execute($query);
+                }
             }
 
             while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
-                //echo "<font color='green'> $row[0] </font></br>";
                 echo '
                 <div class="bug-report rounded white">
           						<div class="report-left">
