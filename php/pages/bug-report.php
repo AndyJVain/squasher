@@ -160,7 +160,7 @@
                                 <form action="../assign-bug.php" method="post">
                                     <div class="form-group blue-text">
                                         <label for="select-developer">Assign to Developer</label>
-                                        <select class="form-control" id="select-developer" name="assigned_developer">
+                                        <select class="form-control" id="select-developer" name="assigned_developer" required>
                                             <option value="" disabled selected>Select a developer</option>
                                             <?php
                                             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
