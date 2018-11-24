@@ -18,8 +18,8 @@
     <div class="container">
         <p>Create an account</p>
         <div class="center rounded light-gray">
-            <div id="form light-gray">
-                <form action="../create-account.php" method="post">
+            <div class="form light-gray">
+                <form method="post">
                     <div class="form-group">
                         <label for="username" class="blue-text">Username</label>
                         <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Enter Username" name="username">
@@ -35,6 +35,67 @@
                     <input type="submit" class="btn btn-primary blue" value="Create">
                     <a type="button" class="btn btn-secondary white" href="login.php">Cancel</a>
                 </form>
+                <?php
+                // ORIGINAL
+
+                // $username = $_POST["username"];
+                // $password = $_POST["password"];
+                // $email = $_POST["email"];
+                //
+                // $queryString = "insert into squasher_user values ('$username', '$email', '$password', 'REPORTER')";
+                //
+                // $binderVariable = 'Connor';
+                //
+                // $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+                // if (!$conn) {
+                //     print "<br> connection failed:";
+                //     exit;
+                // }
+                //
+                // $query = oci_parse($conn, $queryString);
+                // oci_bind_by_name($query, ':title', $binderVariable);
+                // oci_execute($query);
+                //
+                // OCILogoff($conn);
+                //
+                // header("Location: pages/login.php");
+
+                // NEW
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                    $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+                    if (!$conn) {
+                        print "<br> connection failed:";
+                        exit;
+                    }
+
+                    $username = $_POST["username"];
+                    $password = $_POST["password"];
+                    $email = $_POST["email"];
+
+                    $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username'";
+                    $query = oci_parse($conn, $queryString);
+                    oci_execute($query);
+
+                    $row = oci_fetch_array($query, OCI_BOTH);
+
+                    if ($row[0] == 0) {
+                        echo '<p class="center-text error-message">Username Already Exists</p>';
+                    } else {
+                        $queryString = "insert into squasher_user values ('$username', '$email', '$password', 'REPORTER')";
+
+                        $binderVariable = 'Connor';
+
+                        $query = oci_parse($conn, $queryString);
+                        oci_bind_by_name($query, ':title', $binderVariable);
+                        oci_execute($query);
+
+                        OCILogoff($conn);
+
+                        header("Location: login.php");
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
