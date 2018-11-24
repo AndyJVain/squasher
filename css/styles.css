@@ -103,3 +103,13 @@
     justify-content: flex-end;
     float: right;
 }
+
+.center-text {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.error-message {
+    font-weight: bold;
+    color: #ee1414;
+}
