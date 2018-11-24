@@ -8,12 +8,12 @@ create table squasher_user(
 	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL
  );
 
-insert into squasher_user values('psanch','pedrosanchezm97@gmail.com','lololol','TESTER');
-insert into squasher_user values('pahrens','pahrens@scu.edu','cheeks','TESTER');
-insert into squasher_user values('connor-carraher','ccarraher@scu.edu','cheeks','DEVELOPER');
-insert into squasher_user values('victor','vyu@scu.edu','cheeks','DEVELOPER');
-insert into squasher_user values('mason','mbruce@scu.edu','cheeks','DEVELOPER');
-insert into squasher_user values('andyj','avainauskas@scu.edu','boosted','MANAGER');
+insert into squasher_user values('tester','tester@scu.edu','123','TESTER');
+insert into squasher_user values('developer','developer@scu.edu','123','DEVELOPER');
+insert into squasher_user values('Andy','avainauskas@scu.edu','123','DEVELOPER');
+insert into squasher_user values('Connor','ccarraher@scu.edu','123','DEVELOPER');
+insert into squasher_user values('Pedro','psanchez@scu.edu','123','DEVELOPER');
+insert into squasher_user values('manager','manager@scu.edu','123','MANAGER');
 insert into squasher_user values('ronnie', 'rdanielson@scu.edu', 'cohesion', 'REPORTER');
 
 insert into squasher_user values('assigner','d@scu.edu','cheeks','DUMMY');

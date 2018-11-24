@@ -32,8 +32,7 @@
                 <div class="right">
                     <a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>
                 </div>';
-            }
-            else {
+            } elseif($_SESSION['role'] == 'MANAGER') {
                 echo '<div class="left">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle blue" type="button" data-toggle="dropdown">Filter by status
@@ -48,6 +47,13 @@
                             <li><a href="../pages/home.php?filter=ALL">All</a></li>
                         </ul>
                     </div>
+                </div>
+                <div class="right">
+                    <p class="role-label">',$_SESSION['role'],'</p>
+                </div>';
+            }
+            else {
+                echo '<div class="left">
                 </div>
                 <div class="right">
                     <p class="role-label">',$_SESSION['role'],'</p>

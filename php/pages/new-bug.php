@@ -39,7 +39,7 @@
             <form action="../submit-bug.php" method="post">
                 <div class="form-group blue-text">
                     <label for="select-product">Product</label>
-                    <select class="form-control" id="select-product" name="product">
+                    <select class="form-control" id="select-product" name="product" required>
                         <option value="" disabled selected>Select a product</option>
                         <option>Camino</option>
                         <option>CourseAvail</option>
@@ -50,11 +50,11 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="set-title">Title</label>
-                    <input type="text" class="form-control" id="set-title" placeholder="Enter a descriptive title for your report" name="title">
+                    <input type="text" class="form-control" id="set-title" placeholder="Enter a descriptive title for your report" name="title" required>
                 </div>
                 <div class="form-group blue-text">
                     <label for="select-bug-type">Bug Type</label>
-                    <select class="form-control" id="select-type" name="bug-type">
+                    <select class="form-control" id="select-type" name="bug-type" required>
                         <option value="" disabled selected>Select a bug type</option>
                         <option>Security</option>
                         <option>Crash/Hang/Data Loss</option>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="select-reproducibility">Reproducibility</label>
-                    <select class="form-control" id="select-rep" name="rep">
+                    <select class="form-control" id="select-rep" name="rep" required>
                         <option value="" disabled selected>Select a reproducibility</option>
                         <option>Always</option>
                         <option>Sometimes</option>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="16" name="description">Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
+                    <textarea class="form-control" id="description" rows="16" name="description" required>Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
                 </div>
                 <input type="submit" class="btn btn-primary btn-lg submit-btn blue" value="Submit">
             </form>
