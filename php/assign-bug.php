@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($role == "DEVELOPER") {
         $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION' where bug_id = $bug_id";
-        $queryAssigned = "update squasher_reports set ASSIGNED = 'psanch' where bug_id = $bug_id";
+        $queryAssigned = "update squasher_reports set ASSIGNED = 'tester' where bug_id = $bug_id";
 
         $query = oci_parse($conn, $queryState);
         oci_execute($query);
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif($role == "MANAGER"){
         $assigned_developer = $_POST["assigned_developer"];
 
-        $queryState = "update squasher_reports set state = 'PENDING FIX DEVELOPMENT' where bug_id = $bug_id";
+        $queryState = "update squasher_reports set state = 'IN DEVELOPMENT' where bug_id = $bug_id";
         $queryAssigned = "update squasher_reports set ASSIGNED = '$assigned_developer' where bug_id = $bug_id";
 
         $query = oci_parse($conn, $queryState);

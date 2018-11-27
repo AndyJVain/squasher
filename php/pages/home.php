@@ -40,7 +40,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="../pages/home.php?filter=PENDING BUG VERIFICATION">Pending Bug Verification</a></li>
                             <li><a href="../pages/home.php?filter=PENDING DEVELOPER ASSIGNMENT">Pending Developer Assignment</a></li>
-                            <li><a href="../pages/home.php?filter=PENDING FIX DEVELOPMENT">Pending Fix Development</a></li>
+                            <li><a href="../pages/home.php?filter=IN DEVELOPMENT">In Development</a></li>
                             <li><a href="../pages/home.php?filter=PENDING FIX VERIFICATION">Pending Fix Verification</a></li>
                             <li><a href="../pages/home.php?filter=BUG VERIFICATION FAILED">Bug Verification Failed</a></li>
                             <li><a href="../pages/home.php?filter=DONE">Done</a></li>
