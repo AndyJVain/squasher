@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sysDate = $row_date[0];
 
     //get the tester that this should be assigned to`
-    $newAssigned = getLeastWorkedTester($bug_id);
+    $newAssigned = getLeastWorkedTester($reportNumber);
 
     //setup query for new report
     $newReportQuery = "insert into SQUASHER_REPORTS values('$reportNumber','$product','$title','$bugType','$rep','$newAssigned','$defaultState','$reporterUsername','$sysDate','$description')";
