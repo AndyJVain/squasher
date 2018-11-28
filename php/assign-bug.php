@@ -16,9 +16,6 @@ $username = $_SESSION['username'];
 function emailReporter($bug_id){
     $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
 
-    // use wordwrap() if lines are longer than 70 characters
-    $msg = wordwrap($msg);
-
     $headers = "From: donotreply@squasher.com";
 
     $getEmailQuery = "select * from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
