@@ -30,7 +30,8 @@ function emailReporter(){
     $row = oci_fetch_array($query, OCI_BOTH);
 
     // send email
-    echo '$row['email']';
+    print_r($row['email']);
+    
     //mail($row['email'], "Squasher - Bug Update", $msg, $headers);
 }
 
