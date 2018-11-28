@@ -31,9 +31,7 @@
                             </ul>
                         </div>';
                     } else {
-                        echo '<ul class="nav navbar-nav navbar-right pull-right">
-                            <li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-                        </ul>';
+                        echo '<li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
                     }
                     ?>
                 </ul>
