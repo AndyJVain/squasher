@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <input type="submit" class="btn btn-primary blue" value="Create">
-                    <a type="button" class="btn btn-secondary white" href="login.php">Cancel</a>
+                    <a type="button" class="btn btn-secondary white" href="home.php">Cancel</a>
                 </form>
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -68,15 +68,9 @@
                     if ($row[0] != 0) {
                         echo '<p class="center-text error-message">Username Already Exists</p>';
                     } else {
-                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', '$role')";
-
-                        echo $role;
-
-                        // What is this?
-                        $binderVariable = 'Connor';
+                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', '$role', 0, 0)";
 
                         $query = oci_parse($conn, $queryString);
-                        oci_bind_by_name($query, ':title', $binderVariable);
                         oci_execute($query);
 
                         OCILogoff($conn);
