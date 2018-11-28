@@ -8,8 +8,6 @@ DECLARE
     v_num_new NUMBER;
 BEGIN
 
-    DBMS_OUTPUT.PUT_LINE( 'trial. ASSIGNED: ' || :new.ASSIGNED);
-
     select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
     select NUM_ASSIGNED into v_num_old from squasher_user where USERNAME = :old.ASSIGNED;
 

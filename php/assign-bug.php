@@ -39,70 +39,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($role == "DEVELOPER") {
-        $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION' where bug_id = $bug_id";
-        $queryAssigned = "update squasher_reports set ASSIGNED = 'tester' where bug_id = $bug_id";
+        $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION', ASSIGNED = 'tester' where bug_id = $bug_id";
 
         emailReporter($bug_id);
 
         $query = oci_parse($conn, $queryState);
         oci_execute($query);
 
-        $query = oci_parse($conn, $queryAssigned);
-        oci_execute($query);
     }
 
     elseif($role == "TESTER"){
         if ($state == "PENDING BUG VERIFICATION") {
           if (isset($_POST['not_verified'])) {
-              $queryState = "update squasher_reports set state = 'BUG VERIFICATION FAILED' where bug_id = $bug_id";
-              $queryAssigned = "update squasher_reports set ASSIGNED = 'failed' where bug_id = $bug_id";
+              $queryState = "update squasher_reports set state = 'BUG VERIFICATION FAILED',ASSIGNED = 'failed' where bug_id = $bug_id";
 
               emailReporter($bug_id);
 
               $query = oci_parse($conn, $queryState);
               oci_execute($query);
 
-              $query = oci_parse($conn, $queryAssigned);
-              oci_execute($query);
           }
           elseif (isset($_POST['verified'])) {
-              $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $bug_id";
-              $queryAssigned = "update squasher_reports set ASSIGNED = 'manager' where bug_id = $bug_id";
-
+              $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT', ASSIGNED = 'manager' where bug_id = $bug_id";
               emailReporter($bug_id);
 
               $query = oci_parse($conn, $queryState);
               oci_execute($query);
 
-              $query = oci_parse($conn, $queryAssigned);
-              oci_execute($query);
           }
 
         } elseif ($state == "PENDING FIX VERIFICATION") {
             if (isset($_POST['not_verified'])) {
-                $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $bug_id";
-                $queryAssigned = "update squasher_reports set ASSIGNED = 'manager' where bug_id = $bug_id";
+                $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT', ASSIGNED = 'manager' where bug_id = $bug_id";
 
                 emailReporter($bug_id);
 
                 $query = oci_parse($conn, $queryState);
                 oci_execute($query);
 
-                $query = oci_parse($conn, $queryAssigned);
-                oci_execute($query);
 
             }
             elseif (isset($_POST['verified'])) {
-                $queryState = "update squasher_reports set state = 'DONE' where bug_id = $bug_id";
-                $queryAssigned = "update squasher_reports set ASSIGNED = 'done' where bug_id = $bug_id";
+                $queryState = "update squasher_reports set state = 'DONE', ASSIGNED = 'done' where bug_id = $bug_id";
 
                 emailReporter($bug_id);
 
                 $query = oci_parse($conn, $queryState);
                 oci_execute($query);
 
-                $query = oci_parse($conn, $queryAssigned);
-                oci_execute($query);
             }
         }
     }
@@ -110,16 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif($role == "MANAGER"){
         $assigned_developer = $_POST["assigned_developer"];
 
-        $queryState = "update squasher_reports set state = 'IN DEVELOPMENT' where bug_id = $bug_id";
-        $queryAssigned = "update squasher_reports set ASSIGNED = '$assigned_developer' where bug_id = $bug_id";
+        $queryState = "update squasher_reports set state = 'IN DEVELOPMENT', ASSIGNED = '$assigned_developer' where bug_id = $bug_id";
 
         emailReporter($bug_id);
 
         $query = oci_parse($conn, $queryState);
         oci_execute($query);
 
-        $query = oci_parse($conn, $queryAssigned);
-        oci_execute($query);
     }
 
     OCILogoff($conn);
