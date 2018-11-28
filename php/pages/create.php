@@ -47,6 +47,7 @@
                     $username = $_POST["username"];
                     $password = $_POST["password"];
                     $email = $_POST["email"];
+                    $hashedPassword = hash("sha256",$password);
 
                     $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username'";
                     $query = oci_parse($conn, $queryString);
@@ -57,7 +58,7 @@
                     if ($row[0] != 0) {
                         echo '<p class="center-text error-message">Username Already Exists</p>';
                     } else {
-                        $queryString = "insert into squasher_user values ('$username', '$email', '$password', 'REPORTER')";
+                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', 'REPORTER')";
 
                         $binderVariable = 'Connor';
 

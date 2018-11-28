@@ -51,7 +51,9 @@
                     $username = $_POST["username"];
                     $password = $_POST["password"];
 
-                    $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$password'";
+                    $hashedPassword = hash("sha256",$password);
+
+                    $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$hashedPassword'";
                     $query = oci_parse($conn, $queryString);
 
                     oci_execute($query);
