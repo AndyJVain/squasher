@@ -12,7 +12,7 @@ BEGIN
     select NUM_ASSIGNED into v_num_old from squasher_user where USERNAME = :old.ASSIGNED;
 
     update squasher_user set NUM_ASSIGNED = (v_num_old - 1) where USERNAME = :old.ASSIGNED;
-    update squasher_user set NUM_ASSIGNED = (v_num_new + 1) where USERNAME = :new.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_new + 1), LATEST_ASSIGNED_BUG = :new.bug_id where USERNAME = :new.ASSIGNED;
 
 
 END;
@@ -29,7 +29,7 @@ BEGIN
 
 
     select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
-    update squasher_user set NUM_ASSIGNED = (v_num_new+1) where USERNAME = :new.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_new+1), LATEST_ASSIGNED_BUG = :new.bug_id where USERNAME = :new.ASSIGNED;
 
 END;
 /

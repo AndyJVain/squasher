@@ -6,7 +6,8 @@ create table squasher_user(
 	EMAIL varchar(50) NOT NULL,
 	PASSWORD varchar(64) NOT NULL,
 	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL,
-	NUM_ASSIGNED NUMBER
+	NUM_ASSIGNED NUMBER,
+	LATEST_ASSIGNED_BUG NUMBER
  );
 
 insert into squasher_user values('reporter','ccarraher@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','REPORTER',0);
