@@ -62,8 +62,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     print_r($reportNumber, $reportNumber+1);
 
+    //empty reportNumber table
+    $updateReportNumberQuery = "delete squasher_counter where report_number < ($reportNumber+1)";
+    $query = oci_parse($conn, $updateReportNumberQuery);
+    oci_execute($query);
+
     //update ReportNumber
-    $updateReportNumberQuery = "update squasher_counter set report_number = ($reportNumber+1)";
+    $updateReportNumberQuery = "insert into squasher_counter values($reportNumber+1)";
     $query = oci_parse($conn, $updateReportNumberQuery);
     oci_execute($query);
 
