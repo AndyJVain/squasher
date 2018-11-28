@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reportNumber = $row_reportNumber[0];
 
     //update ReportNumber
-    $updateReportNumberQuery = "insert into SQUASHER_COUNTER values($reportNumber+1)";
+    $updateReportNumberQuery = "update SQUASHER_COUNTER set report_number = $reportNumber+1 where report_number = $reportNumber)";
     $query = oci_parse($conn, $updateReportNumberQuery);
     oci_execute($query);
 
