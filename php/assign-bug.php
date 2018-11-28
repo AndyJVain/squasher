@@ -30,9 +30,7 @@ function emailReporter($bug_id){
     $row = oci_fetch_array($query, OCI_BOTH);
 
     // send email
-    print_r($row['email']);
-
-    //mail($row['email'], "Squasher - Bug Update", $msg, $headers);
+    mail($row['EMAIL'], "Squasher - Bug Update", $msg, $headers);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -127,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     OCILogoff($conn);
 
-    //header("location: ../php/pages/home.php");
+    header("location: ../php/pages/home.php");
 }
 ?>
 
