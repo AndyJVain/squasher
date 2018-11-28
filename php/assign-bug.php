@@ -17,20 +17,20 @@ function emailReporter(){
     $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
 
     // use wordwrap() if lines are longer than 70 characters
-    $msg = wordwrap($msg,70);
+    $msg = wordwrap($msg);
 
-    $headers = "From: donotreply@squasher.com" . "\r\n" .
+    $headers = "From: donotreply@squasher.com" . "\r\n" .;
 
-    $getEmailQuery = "select email from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
+    $getEmailQuery = "select * from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
 
     $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
     $query = oci_parse($conn, $getEmailQuery);
     oci_execute($query);
 
-    $email = oci_fetch_array($query, OCI_BOTH);
+    $row = oci_fetch_array($query, OCI_BOTH);
 
     // send email
-    mail("ccarraher@scu.edu", "Squasher - Bug Update", $msg, $headers);
+    mail($row['email'], "Squasher - Bug Update", $msg, $headers);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
