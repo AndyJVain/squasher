@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           }
           elseif (isset($_POST['verified'])) {
               $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $bug_id";
-              $queryAssigned = "update squasher_reports set ASSIGNED = 'andyj' where bug_id = $bug_id";
+              $queryAssigned = "update squasher_reports set ASSIGNED = 'manager' where bug_id = $bug_id";
 
               emailReporter($bug_id);
 
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($state == "PENDING FIX VERIFICATION") {
             if (isset($_POST['not_verified'])) {
                 $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT' where bug_id = $bug_id";
-                $queryAssigned = "update squasher_reports set ASSIGNED = 'andyj' where bug_id = $bug_id";
+                $queryAssigned = "update squasher_reports set ASSIGNED = 'manager' where bug_id = $bug_id";
 
                 emailReporter($bug_id);
 

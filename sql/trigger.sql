@@ -1,52 +1,38 @@
 
-
-CREATE OR REPLACE  TRIGGER trigger_numAssigned
-BEFORE
-INSERT OR UPDATE
---OF ASSIGNED --colname
-ON squasher_reports
---REFERENCING OLD AS o NEW AS n
-FOR EACH ROW
-WHEN (OLD.ASSIGNED != NEW.ASSIGNED) --we dont want the cases where person assigned has not changed
+--handles updating the number of assigned bugs a user has ON UPDATE
+CREATE or REPLACE TRIGGER update_numAssigned
+    AFTER UPDATE on squasher_reports
+    FOR EACH ROW
 DECLARE
-   v_num_old NUMBER;
-   v_num_new NUMBER;
+    v_num_old NUMBER;
+    v_num_new NUMBER;
 BEGIN
-   --Executable-statements
-   --get old.person's number of bugs assigned to them
-   select NUM_ASSIGNED into v_num_old from squasher_user where USERNAME = OLD.ASSIGNED;
 
-   --get new.person's number of bugs assigned to them
-   select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = NEW.ASSIGNED;
+    DBMS_OUTPUT.PUT_LINE( 'trial. ASSIGNED: ' || :new.ASSIGNED);
 
-   --old person now has one less bug assigned to them
-   v_num_old := v_num_old - 1;
-   update squasher_user set NUM_ASSIGNED = (v_num_old) where USERNAME = OLD.ASSIGNED;
+    select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
+    select NUM_ASSIGNED into v_num_old from squasher_user where USERNAME = :old.ASSIGNED;
 
-   --new person now has one more bug assigned to them
-   v_num_new := v_num_new + 1;
-   update squasher_user set NUM_ASSIGNED = (v_num_new) where USERNAME = NEW.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_old - 1) where USERNAME = :old.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_new + 1) where USERNAME = :new.ASSIGNED;
+
 
 END;
 /
 show errors;
 
+--handles updating the number of assigned bugs a user has ON INSERTION
+CREATE or REPLACE TRIGGER insert_numAssigned
+    AFTER INSERT on squasher_reports
+    FOR EACH ROW
+DECLARE
+    v_num_new NUMBER;
+BEGIN
 
---
--- CREATE OR REPLACE TRIGGER trigger_assignment
--- {BEFORE | AFTER | INSTEAD OF }
--- {INSERT [OR] | UPDATE [OR] | DELETE}
--- [OF col_name]
--- ON table_name
--- [REFERENCING OLD AS o NEW AS n]
--- [FOR EACH ROW]
--- WHEN (condition)
--- DECLARE
---    Declaration-statements
--- BEGIN
---    Executable-statements
--- EXCEPTION
---    Exception-handling-statements
--- END;
--- /
--- show errors;
+
+    select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_new+1) where USERNAME = :new.ASSIGNED;
+
+END;
+/
+show errors;
