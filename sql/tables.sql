@@ -5,20 +5,22 @@ create table squasher_user(
 	USERNAME varchar(50) PRIMARY KEY,
 	EMAIL varchar(50) NOT NULL,
 	PASSWORD varchar(64) NOT NULL,
-	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL
+	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL,
+	NUM_ASSIGNED NUMBER
  );
 
-insert into squasher_user values('reporter','ccarraher@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','REPORTER');
-insert into squasher_user values('tester','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER');
-insert into squasher_user values('tester1','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER');
-insert into squasher_user values('dev','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER');
-insert into squasher_user values('dev1','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER');
-insert into squasher_user values('dev2','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER');
-insert into squasher_user values('manager','manager@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','MANAGER');
+insert into squasher_user values('reporter','ccarraher@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','REPORTER',0);
+insert into squasher_user values('tester','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER',0);
+insert into squasher_user values('tester1','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER',0);
+insert into squasher_user values('dev','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER',0);
+insert into squasher_user values('dev1','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER',0);
+insert into squasher_user values('dev2','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER',0);
+insert into squasher_user values('manager','manager@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','MANAGER',0);
 
-insert into squasher_user values('assigner','d@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY');
-insert into squasher_user values('failed','bsmith3@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY');
-insert into squasher_user values('done','bsmith3@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY');
+insert into squasher_user values('assigner_bug','d@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0);
+insert into squasher_user values('assigner_fix','d@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0);
+insert into squasher_user values('failed','b@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0);
+insert into squasher_user values('done','b@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0);
 
 drop table squasher_counter;
 create table squasher_counter(
