@@ -1,3 +1,15 @@
+.menu-dropdown-container {
+    position: relative;
+    margin-right: 20px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Bottom of button */
+  right: 0;
+  margin-left: -150px; /* More to the left */
+}
+
 .form-control {
     width: 250px;
 }
