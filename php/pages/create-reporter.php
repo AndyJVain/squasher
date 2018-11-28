@@ -9,38 +9,34 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/login.css">
+    <link rel="stylesheet" href="../../css/create.css">
 
-    <title>Squasher - Login</title>
+    <title>Squasher - Create Account</title>
 </head>
 
 <body>
     <div class="container">
+        <p>Create an account</p>
         <div class="center rounded light-gray">
-            <div class="rounded dark-gray">
-                <img src="../../statics/homepage-icon.png" class="img-fluid">
-            </div>
             <div class="form light-gray">
                 <form method="post">
                     <div class="form-group">
-                        <label for="username">Login</label>
-                        <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Username" name="username">
+                        <label for="username" class="blue-text">Username</label>
+                        <input type="username" class="form-control" id="username" aria-describedby="Username" placeholder="Enter Username" name="username" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" aria-describedby="Password" placeholder="Password" name="password">
+                        <label for="password" class="blue-text">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Create Password" name="password" required>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-block blue" value="Login">
+                    <div class="form-group">
+                        <label for="email" class="blue-text">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+                    </div>
+                    <input type="submit" class="btn btn-primary blue" value="Create">
+                    <a type="button" class="btn btn-secondary white" href="login.php">Cancel</a>
                 </form>
-                <p class="center-text"><a href="create-reporter.php">Create</a> a new account</p>
-
                 <?php
-                if (isset($_SESSION['username'])) {
-                    session_destroy();
-                }
-                session_start();
-
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // username and password sent from form
 
                     $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
                     if (!$conn) {
@@ -50,32 +46,32 @@
 
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-
+                    $email = $_POST["email"];
                     $hashedPassword = hash("sha256",$password);
 
-                    $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$hashedPassword'";
+                    $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username'";
                     $query = oci_parse($conn, $queryString);
-
                     oci_execute($query);
 
                     $row = oci_fetch_array($query, OCI_BOTH);
 
-                    if ($row[0] == 0) {
-                        echo '<p class="center-text error-message">Incorrect Username or Password</p>';
+                    if ($row[0] != 0) {
+                        echo '<p class="center-text error-message">Username Already Exists</p>';
                     } else {
-                        //verified user
-                        $_SESSION['username'] = $username;
+                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', 'REPORTER')";
 
-                        $query = oci_parse($conn, "select role from squasher_user where username = '$username'");
+                        $binderVariable = 'Connor';
+
+                        $query = oci_parse($conn, $queryString);
+                        oci_bind_by_name($query, ':title', $binderVariable);
                         oci_execute($query);
-                        $row = oci_fetch_array($query, OCI_BOTH);
-                        $_SESSION['role'] = $row[0];
 
-                        header("location: home.php");
+                        OCILogoff($conn);
+
+                        header("Location: login.php");
                     }
                 }
                 ?>
-
             </div>
         </div>
     </div>
