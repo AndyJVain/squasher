@@ -13,6 +13,26 @@ $state = $_POST['state'];
 $role = $_SESSION['role'];
 $username = $_SESSION['username'];
 
+function emailReporter(){
+    $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
+
+    // use wordwrap() if lines are longer than 70 characters
+    $msg = wordwrap($msg,70);
+
+    $headers = "From: donotreply@squasher.com" . "\r\n" .
+
+    $getEmailQuery = "select email from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
+
+    $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+    $query = oci_parse($conn, $getEmailQuery);
+    oci_execute($query);
+
+    $email = oci_fetch_array($query, OCI_BOTH);
+
+    // send email
+    mail($email[0], "Squasher - Bug Update", $msg, $headers);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
@@ -106,26 +126,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     OCILogoff($conn);
 
     header("location: ../php/pages/home.php");
-
-    function emailReporter(){
-        $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
-
-        // use wordwrap() if lines are longer than 70 characters
-        $msg = wordwrap($msg,70);
-
-        $headers = "From: donotreply@squasher.com" . "\r\n" .
-
-        $getEmailQuery = "select email from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
-
-        $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
-        $query = oci_parse($conn, $getEmailQuery);
-        oci_execute($query);
-
-        $email = oci_fetch_array($query, OCI_BOTH);
-
-        // send email
-        mail($email[0], "Squasher - Bug Update", $msg, $headers);
-    }
 }
 ?>
 
