@@ -60,8 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row_reportNumber = oci_fetch_array($query, OCI_BOTH);
     $reportNumber = $row_reportNumber[0];
 
+    print_r($reportNumber, $reportNumber+1);
+
     //update ReportNumber
-    $updateReportNumberQuery = "update squasher_counter set report_number = ($reportNumber+1) where report_number = $reportNumber)";
+    $updateReportNumberQuery = "update squasher_counter set report_number = ($reportNumber+1)";
     $query = oci_parse($conn, $updateReportNumberQuery);
     oci_execute($query);
 
@@ -82,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     OCILogoff($conn);
 
-    header("Location: pages/home.php");
+    //header("Location: pages/home.php");
 }
 ?>
 
