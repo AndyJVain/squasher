@@ -30,7 +30,7 @@ function emailReporter(){
     $email = oci_fetch_array($query, OCI_BOTH);
 
     // send email
-    mail($email[0], "Squasher - Bug Update", $msg, $headers);
+    mail("ccarraher@scu.edu", "Squasher - Bug Update", $msg, $headers);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
