@@ -30,6 +30,30 @@ function emailReporter($bug_id){
     mail($row['EMAIL'], "Squasher - Bug Update", $msg, $headers);
 }
 
+function getLeastWorkedTester($bug_id){
+  $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+  if (!$conn) {
+      print "<br> connection failed:";
+      exit;
+  }
+
+  $getMin = "select MIN(NUM_ASSIGNED) as MINIMUM from squasher_user where ROLE = 'TESTER' ";
+  $query = oci_parse($conn, $getMin);
+  oci_execute($query);
+  $row_min = oci_fetch_array($query, OCI_BOTH);
+
+  $minAssigned = $row_min['MINIMUM'];
+
+  $getUsername = "select username as ASSIGNEE from squasher_user where ROLE = 'TESTER' and USERNAME != 'assigner' and NUM_ASSIGNED = $minAssigned and ROWNUM <= 1";
+  $query = oci_parse($conn, $getUsername);
+  oci_execute($query);
+  $row_assignee = oci_fetch_array($query, OCI_BOTH);
+
+  $assignee = $row_assignee['ASSIGNEE'];
+
+  return $assignee;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
@@ -39,10 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($role == "DEVELOPER") {
-        $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION', ASSIGNED = 'assigner' where bug_id = $bug_id";
+
 
         emailReporter($bug_id);
+        $assignee = getLeastWorkedTester($bug_id);
 
+        $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION', ASSIGNED = '$assignee' where bug_id = $bug_id";
         $query = oci_parse($conn, $queryState);
         oci_execute($query);
 
