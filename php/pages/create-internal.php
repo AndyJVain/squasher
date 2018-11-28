@@ -70,6 +70,9 @@
                     } else {
                         $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', '$role')";
 
+                        echo $role;
+
+                        // What is this?
                         $binderVariable = 'Connor';
 
                         $query = oci_parse($conn, $queryString);
@@ -78,7 +81,7 @@
 
                         OCILogoff($conn);
 
-                        header("Location: home.php");
+                        // header("Location: home.php");
                     }
                 }
                 ?>
