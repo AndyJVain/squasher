@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     OCILogoff($conn);
 
-    header("Location: pages/home.php");
+    //header("Location: pages/home.php");
 }
 ?>
 
