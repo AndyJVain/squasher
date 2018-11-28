@@ -1,6 +1,6 @@
 --handles assigning bugs for verification ON INSERT
 CREATE or REPLACE TRIGGER bugAssignment_insert
-  AFTER INSERT on squasher_reports
+  AFTER UPDATE on squasher_reports
   FOR EACH ROW
   WHEN(new.ASSIGNED = 'assigner')
 DECLARE
@@ -9,7 +9,7 @@ DECLARE
 BEGIN
   select MIN(NUM_ASSIGNED) into v_minAssigned from squasher_user where ROLE = 'TESTER';
 
-  select username into v_Assignment from squasher_user where ROLE = 'TESTER' and NUM_ASSIGNED = v_minAssigned and ROWNUM <= 1 and USERNAME != 'assigned';
+  select username into v_Assignment from squasher_user where ROLE = 'TESTER' and NUM_ASSIGNED = v_minAssigned and ROWNUM <= 1 and USERNAME != 'assigner';
 
   update squasher_reports set ASSIGNED = v_Assignment where bug_id = :new.bug_id;
 END;
