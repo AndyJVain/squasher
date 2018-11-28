@@ -39,7 +39,7 @@ function getLeastWorkedTester($bug_id){
 
   $assignee = $row_assignee['ASSIGNEE'];
 
-  return $assignee
+  return $assignee;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
