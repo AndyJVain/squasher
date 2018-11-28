@@ -14,9 +14,33 @@ $reporterUsername = $_SESSION['username'];
 
 //by default, will assign to tester (pedro)
 //Will setup a trigger to handle auto-assignment on DB side
-$defaultAssigned = 'tester';
+$defaultAssigned = 'assigner';
 
 $defaultState = "PENDING BUG VERIFICATION";
+
+function getLeastWorkedTester($bug_id){
+  $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+  if (!$conn) {
+      print "<br> connection failed:";
+      exit;
+  }
+
+  $getMin = "select MIN(NUM_ASSIGNED) as MINIMUM from squasher_user where ROLE = 'TESTER' ";
+  $query = oci_parse($conn, $getMin);
+  oci_execute($query);
+  $row_min = oci_fetch_array($query, OCI_BOTH);
+
+  $minAssigned = $row_min['MINIMUM'];
+
+  $getUsername = "select username as ASSIGNEE from squasher_user where ROLE = 'TESTER' and USERNAME != 'assigner' and NUM_ASSIGNED = $minAssigned and ROWNUM <= 1";
+  $query = oci_parse($conn, $getUsername);
+  oci_execute($query);
+  $row_assignee = oci_fetch_array($query, OCI_BOTH);
+
+  $assignee = $row_assignee['ASSIGNEE'];
+
+  return $assignee;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
@@ -24,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         print "<br> connection failed:";
         exit;
     }
+
+
 
     $getReportNumberQuery = "select MAX(REPORT_NUMBER) from SQUASHER_COUNTER";
     $getDateQuery = "select SYSDATE from DUAL";
@@ -34,8 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row_reportNumber = oci_fetch_array($query, OCI_BOTH);
     $reportNumber = $row_reportNumber[0];
 
+    //potential issue with timing attack
+    //empty reportNumber table
+    $updateReportNumberQuery = "delete squasher_counter where report_number < ($reportNumber+1)";
+    $query = oci_parse($conn, $updateReportNumberQuery);
+    oci_execute($query);
+
     //update ReportNumber
-    $updateReportNumberQuery = "insert into SQUASHER_COUNTER values($reportNumber+1)";
+    $updateReportNumberQuery = "insert into squasher_counter values($reportNumber+1)";
     $query = oci_parse($conn, $updateReportNumberQuery);
     oci_execute($query);
 
@@ -45,8 +77,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row_date = oci_fetch_array($query, OCI_BOTH);
     $sysDate = $row_date[0];
 
+    //get the tester that this should be assigned to`
+    $newAssigned = getLeastWorkedTester($reportNumber);
+
     //setup query for new report
-    $newReportQuery = "insert into SQUASHER_REPORTS values('$reportNumber','$product','$title','$bugType','$rep','$defaultAssigned','$defaultState','$reporterUsername','$sysDate','$description')";
+    $newReportQuery = "insert into SQUASHER_REPORTS values('$reportNumber','$product','$title','$bugType','$rep','$newAssigned','$defaultState','$reporterUsername','$sysDate','$description')";
     echo($newReportQuery);
     $query = oci_parse($conn, $newReportQuery);
     oci_execute($query);
