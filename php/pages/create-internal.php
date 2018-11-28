@@ -16,7 +16,7 @@
 
 <body>
     <div class="container">
-        <p>Create an account</p>
+        <p>Create an internal account</p>
         <div class="center rounded light-gray">
             <div class="form light-gray">
                 <form method="post">
@@ -31,6 +31,14 @@
                     <div class="form-group">
                         <label for="email" class="blue-text">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+                    </div>
+                    <div class="form-group blue-text">
+                        <label for="select-role">Role</label>
+                        <select class="form-control" id="select-role" name="role" required>
+                            <option value="" disabled selected>Select a role</option>
+                            <option value="TESTER">Tester</option>
+                            <option value="DEVELOPER">Developer</option>
+                        </select>
                     </div>
                     <input type="submit" class="btn btn-primary blue" value="Create">
                     <a type="button" class="btn btn-secondary white" href="login.php">Cancel</a>
@@ -47,6 +55,8 @@
                     $username = $_POST["username"];
                     $password = $_POST["password"];
                     $email = $_POST["email"];
+                    $role = $_POST["role"];
+
                     $hashedPassword = hash("sha256",$password);
 
                     $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username'";
@@ -58,7 +68,7 @@
                     if ($row[0] != 0) {
                         echo '<p class="center-text error-message">Username Already Exists</p>';
                     } else {
-                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', 'REPORTER')";
+                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', '$role')";
 
                         $binderVariable = 'Connor';
 
@@ -68,7 +78,7 @@
 
                         OCILogoff($conn);
 
-                        header("Location: login.php");
+                        header("Location: home.php");
                     }
                 }
                 ?>
