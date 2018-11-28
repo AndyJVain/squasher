@@ -4,7 +4,7 @@ drop table squasher_user;
 create table squasher_user(
 	USERNAME varchar(50) PRIMARY KEY,
 	EMAIL varchar(50) NOT NULL,
-	PASSWORD varchar(50) NOT NULL,
+	PASSWORD varchar(64) NOT NULL,
 	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL
  );
 
