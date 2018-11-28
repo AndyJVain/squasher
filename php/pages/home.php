@@ -19,20 +19,32 @@
         <nav class="navbar navbar-light">
             <div class="navbar-brand black-text">Squasher - My Bugs</div>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                <?php
+                include '../session.php';
+
+                if ($_SESSION['role'] == 'MANAGER') {
+                    echo '<div class="menu-dropdown-container">
+                        <button class="btn btn-dark dropdown-toggle dark-gray" type="button" data-toggle="dropdown">Menu</button>
+                        <ul class="dropdown-menu menu-list">
+                            <li><a href="create-internal.php">Create Internal Account</a></li>
+                            <li><a href="../logout.php">Log Out</a></li>
+                        </ul>
+                    </div>';
+                } else {
+                    echo '<li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
+                }
+                ?>
             </ul>
         </nav>
         <div class="header">
             <?php
-            include '../session.php';
-
-            if($_SESSION['role'] == 'REPORTER'){
+            if ($_SESSION['role'] == 'REPORTER') {
                 echo '<div class="left">
                 </div>
                 <div class="right">
                     <a type="button" class="btn btn-primary btn-lg blue" href="new-bug.php">Report New Bug</a>
                 </div>';
-            } elseif($_SESSION['role'] == 'MANAGER') {
+            } elseif ($_SESSION['role'] == 'MANAGER') {
                 echo '<div class="left">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle blue" type="button" data-toggle="dropdown">Filter by status
@@ -51,8 +63,7 @@
                 <div class="right">
                     <p class="role-label">',$_SESSION['role'],'</p>
                 </div>';
-            }
-            else {
+            } else {
                 echo '<div class="left">
                 </div>
                 <div class="right">

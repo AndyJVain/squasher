@@ -26,10 +26,24 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-light">
-            <div class="navbar-brand">Squasher</div>
-            <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-            </ul>
+            <div class="navbar-brand black-text">Squasher - My Bugs</div>
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <?php
+                    include '../session.php';
+
+                    if ($_SESSION['role'] == 'MANAGER') {
+                        echo '<div class="menu-dropdown-container">
+                            <button class="btn btn-dark dropdown-toggle dark-gray" type="button" data-toggle="dropdown">Menu</button>
+                            <ul class="dropdown-menu menu-list">
+                                <li><a href="create-internal.php">Create Internal Account</a></li>
+                                <li><a href="../logout.php">Log Out</a></li>
+                            </ul>
+                        </div>';
+                    } else {
+                        echo '<li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
+                    }
+                    ?>
+                </ul>
         </nav>
 
         <div class="header">
@@ -42,8 +56,6 @@
         </div>
 
         <?php
-        include '../session.php';
-
         $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
         if (!$conn) {
             print "<br> connection failed:";
