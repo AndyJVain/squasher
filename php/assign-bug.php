@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($role == "DEVELOPER") {
-        $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION', ASSIGNED = 'tester' where bug_id = $bug_id";
+        $queryState = "update squasher_reports set state = 'PENDING FIX VERIFICATION', ASSIGNED = 'assigner' where bug_id = $bug_id";
 
         emailReporter($bug_id);
 
