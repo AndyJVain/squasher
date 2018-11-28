@@ -39,7 +39,7 @@ show errors;
 CREATE or REPLACE TRIGGER bugAssignment_insert
   AFTER INSERT on squasher_reports
   FOR EACH ROW
-  WHEN(:new.ASSIGNED = 'assigner')
+  WHEN(new.ASSIGNED = 'assigner')
 DECLARE
   v_minAssigned NUMBER;
   v_Assignment VARCHAR(50);
