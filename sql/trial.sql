@@ -2,7 +2,7 @@
 CREATE or REPLACE TRIGGER bugAssignment_insert
   AFTER UPDATE on squasher_user
   FOR EACH ROW
-  WHEN(new.ASSIGNED = 'assigner')
+  WHEN(new.USERNAME = 'assigner')
 DECLARE
   v_minAssigned NUMBER;
   v_Assignment VARCHAR(50);
