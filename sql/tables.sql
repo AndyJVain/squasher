@@ -8,6 +8,7 @@ create table squasher_user(
 	ROLE varchar(50) check(UPPER(ROLE) in ('REPORTER','TESTER','DEVELOPER','MANAGER','DUMMY')) NOT NULL
  );
 
+insert into squasher_user values('reporter','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','REPORTER');
 insert into squasher_user values('tester','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER');
 insert into squasher_user values('tester1','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER');
 insert into squasher_user values('dev','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER');
@@ -39,4 +40,5 @@ create table squasher_reports(
 	REPORT_DATE VARCHAR(50) NOT NULL,
 	DESCRIPTION VARCHAR(3000) NOT NULL
 );
+
 --insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'connor-carraher', '29-OCT-18','blablabla');

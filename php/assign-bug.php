@@ -19,7 +19,7 @@ function emailReporter(){
     // use wordwrap() if lines are longer than 70 characters
     $msg = wordwrap($msg);
 
-    $headers = "From: donotreply@squasher.com" . "\r\n" .;
+    $headers = "From: donotreply@squasher.com";
 
     $getEmailQuery = "select * from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
 
