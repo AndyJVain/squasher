@@ -3,15 +3,14 @@
 
 <?php
 include 'session.php';
+include 'config.php';
+
 
 $product = $_POST["product"];
 $title = $_POST["title"];
 $bugType = $_POST["bug-type"];
 $rep = $_POST["rep"];
 $description = $_POST["description"];
-
-
-
 $reporterUsername = $_SESSION['username'];
 
 //by default, will assign to tester (pedro)
@@ -20,7 +19,7 @@ $defaultAssigned = 'assigner';
 
 $defaultState = "PENDING BUG VERIFICATION";
 
-function getLeastWorkedTester($bug_id){
+function getLeastWorkedTester($bug_id) {
   $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
   if (!$conn) {
       print "<br> connection failed:";
