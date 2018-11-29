@@ -3,8 +3,6 @@
 
 <?php
 include 'session.php';
-include 'config.php';
-
 
 $product = $_POST["product"];
 $title = $_POST["title"];
