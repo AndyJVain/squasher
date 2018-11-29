@@ -24,7 +24,7 @@
 
                 if ($_SESSION['role'] == 'MANAGER') {
                     echo '<div class="menu-dropdown-container">
-                        <button class="btn btn-dark dropdown-toggle dark-gray" type="button" data-toggle="dropdown">Menu</button>
+                        <button class="btn dropdown-toggle light-gray" type="button" data-toggle="dropdown">Menu</button>
                         <ul class="dropdown-menu menu-list">
                             <li><a href="create-internal.php">Create Internal Account</a></li>
                             <li><a href="../logout.php">Log Out</a></li>
