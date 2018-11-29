@@ -97,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           }
           elseif (isset($_POST['verified'])) {
               $queryState = "update squasher_reports set state = 'PENDING DEVELOPER ASSIGNMENT', ASSIGNED = 'manager' where bug_id = $bug_id";
+
               emailReporter($bug_id);
 
               $query = oci_parse($conn, $queryState);

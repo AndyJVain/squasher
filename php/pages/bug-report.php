@@ -1,3 +1,11 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file displays a completed bug report form.
+           Logic is also included to determine if the next steps button should appear.
+           The file also contains the appearance and functionality for each of the modals.
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,18 +70,22 @@
             print "<br> connection failed:";
             exit;
         }
+
+        //Get the bug_id from URL
         $bug_id = intval($_GET['bug_id']);
 
+        //Prepare and execute a query to fetch the desired bug's relevant information
         $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCIBILITY, DESCRIPTION, STATE, REPORT_DATE, ASSIGNED, REPORTER_USERNAME from squasher_reports where BUG_ID = '$bug_id'");
-
         oci_execute($query);
         $row = oci_fetch_array($query, OCI_BOTH);
 
-
-        if($row['ASSIGNED'] != $_SESSION['username'] && $row['REPORTER_USERNAME'] != $_SESSION['username'] && $_SESSION['role'] != 'MANAGER'){
+        //Check for permissions to view a specific bug
+        //If user not one of: {the original reporter, the person to which the bug is assigned, or a manager} then user cannot access a given bug report
+        if ($row['ASSIGNED'] != $_SESSION['username'] && $row['REPORTER_USERNAME'] != $_SESSION['username'] && $_SESSION['role'] != 'MANAGER') {
             header("location: home.php");
         } else {
-          echo '<div class="report rounded light-gray">
+            //If use have the correct permissions, display the bug report
+            echo '<div class="report rounded light-gray">
               <div class="report-group blue-text">
                   <label for="product">Product</label>
                   <p>',$row[0],'</p>
@@ -99,6 +111,9 @@
         ?>
             <div class="next-state-container">
                 <?php
+                //Checks permissions in order to determine which modal to display
+                //Different modals for Testers, Developers and Managers
+                //Note that Managers only see the next state button if the STATE of the bug is PENDING DEVELOPER ASSIGNMENT
                 if ($_SESSION['role'] == 'TESTER') {
                     echo '<button type="button" class="btn btn-primary btn-lg next-state-btn blue" data-toggle="modal" data-target="#tester-modal">
                         &rarr;
@@ -181,6 +196,7 @@
                                         <select class="form-control" id="select-developer" name="assigned_developer" required>
                                             <option value="" disabled selected>Select a developer</option>
                                             <?php
+                                            //Lists all developers in the system for the manager to choose from
                                             $conn = connect();
                                             if (!$conn) {
                                                 print "<br> connection failed:";
@@ -200,7 +216,6 @@
                                         <input type="submit" class="btn btn-primary blue" value="Assign">
                                         <input type="hidden" name="bug_id" value="<?php echo intval($_GET['bug_id']); ?>">
                                         <input type="hidden" name="state" value="<?php echo $_GET['state']; ?>">
-                                        <!-- <button type="button" class="btn btn-primary blue">Assign</button> -->
                                     </div>
                                 </form>
                         </div>
