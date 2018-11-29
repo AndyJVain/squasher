@@ -1,3 +1,9 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file holds the logic for moving bugs to the next state. Whenever the state of a bug is changed, an email is sent to the reporter.
+ -->
+
 <html>
 <body>
 
@@ -11,17 +17,18 @@ $role = $_SESSION['role'];
 $username = $_SESSION['username'];
 
 /*
-  function name: emailReporter
-  arguments: bug idea
+  Function Name: emailReporter
+  Arguments: bug_id
+  Purpose: The function uses the bug id and retrieves the associated email address from the database. An email is then sent.
 */
 function emailReporter($bug_id){
+    include 'config.php'
     $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
 
-    $headers = "From: donotreply@squasher.com";
+    $headers = $sender_email;
 
     $getEmailQuery = "select * from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
 
-    //include 'connection.php';
     $conn = connect();
     $query = oci_parse($conn, $getEmailQuery);
     oci_execute($query);

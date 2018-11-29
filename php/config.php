@@ -11,4 +11,5 @@ SENDER email address: example@email.com
 $database_username ='psanchez';
 $database_password ='a47k7S4QOi';
 $database_link ='//dbserver.engr.scu.edu/db11g';
+$sender_email = 'From: donotreply@squasher.com';
 ?>
