@@ -5,13 +5,12 @@
 include 'session.php';
 
 $product = $_POST["product"];
-$title = htmlspecialchars($_POST["title"]);
+$title = $_POST["title"];
 $bugType = $_POST["bug-type"];
 $rep = $_POST["rep"];
-$description = htmlspecialchars($_POST["description"]);
+$description = $_POST["description"];
 
-substr_replace($title,"\'","&#39;");
-substr_replace($description,"\'","&#39;");
+
 
 $reporterUsername = $_SESSION['username'];
 
@@ -96,9 +95,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $a = htmlspecialchars($title);
     $b = htmlentities($title);
-    print_r($title);
-    print_r($a);
-    print_r($b);
+    $c = substr_replace($a,"\'","&#39;");
+    $d = substr_replace($b,"\'","&#39;");
+    $e = substr_replace($title,"\'","&#39;");
+    echo($title);
+    echo($a);
+    echo($b);
+    echo($c);
+    echo($d);
+    echo($e);
 
     //header("Location: pages/home.php");
 }
