@@ -5,10 +5,13 @@
 include 'session.php';
 
 $product = $_POST["product"];
-$title = $_POST["title"];
+$title = htmlspecialchars($_POST["title"]);
 $bugType = $_POST["bug-type"];
 $rep = $_POST["rep"];
-$description = $_POST["description"];
+$description = htmlspecialchars($_POST["description"]);
+
+substr_replace($title,"\'","&#39;");
+substr_replace($description,"\'","&#39;");
 
 $reporterUsername = $_SESSION['username'];
 
