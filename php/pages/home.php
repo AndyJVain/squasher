@@ -104,6 +104,7 @@
                 }
             }
 
+            $row = oci_fetch_array($query, OCI_BOTH)) != false
             if ($row == false) {
                 echo '<p class="no-bugs blue-text">No Assigned Bugs</p>';
             } else {
