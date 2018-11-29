@@ -9,11 +9,7 @@
 }
 
 .light-gray {
-    background-color: #EFEFEF;
-}
-
-.light-gray-text {
-    color: #EFEFEF;
+    background-color: #DFDFDF;
 }
 
 .dark-gray {
@@ -21,10 +17,6 @@
 }
 
 .dark-gray-text {
-    color: #707070;
-}
-
-.darker-gray-text {
     color: #454545;
 }
 
