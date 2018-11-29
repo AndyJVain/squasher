@@ -40,7 +40,7 @@
                             </ul>
                         </div>';
                     } else {
-                        echo '<li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
+                        echo '<li><a class="dark-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
                     }
                     ?>
                 </ul>
