@@ -20,8 +20,9 @@ $defaultAssigned = 'assigner';
 $defaultState = "PENDING BUG VERIFICATION";
 
 function getLeastWorkedTester($bug_id) {
-  $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
-  if (!$conn) {
+    include '../connection.php';
+    $conn = connect();
+    if (!$conn) {
       print "<br> connection failed:";
       exit;
   }
@@ -44,7 +45,8 @@ function getLeastWorkedTester($bug_id) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+    include '../connection.php';
+    $conn = connect();
     if (!$conn) {
         print "<br> connection failed:";
         exit;

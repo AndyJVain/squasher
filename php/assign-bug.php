@@ -17,7 +17,8 @@ function emailReporter($bug_id){
 
     $getEmailQuery = "select * from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
 
-    $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+    include '../connection.php';
+    $conn = connect();
     $query = oci_parse($conn, $getEmailQuery);
     oci_execute($query);
 
@@ -28,8 +29,9 @@ function emailReporter($bug_id){
 }
 
 function getLeastWorkedTester($bug_id){
-  $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
-  if (!$conn) {
+    include '../connection.php';
+    $conn = connect();
+    if (!$conn) {
       print "<br> connection failed:";
       exit;
   }
@@ -53,7 +55,8 @@ function getLeastWorkedTester($bug_id){
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $conn = oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+    include '../connection.php';
+    $conn = connect();
     if (!$conn) {
         print "<br> connection failed:";
         exit;
