@@ -24,14 +24,14 @@
 
                 if ($_SESSION['role'] == 'MANAGER') {
                     echo '<div class="menu-dropdown-container">
-                        <button class="btn btn-dark dropdown-toggle dark-gray" type="button" data-toggle="dropdown">Menu</button>
+                        <button class="btn dropdown-toggle light-gray" type="button" data-toggle="dropdown">Menu</button>
                         <ul class="dropdown-menu menu-list">
                             <li><a href="create-internal.php">Create Internal Account</a></li>
                             <li><a href="../logout.php">Log Out</a></li>
                         </ul>
                     </div>';
                 } else {
-                    echo '<li><a class="darker-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
+                    echo '<li><a class="dark-gray-text" href="../logout.php"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>';
                 }
                 ?>
             </ul>
@@ -72,7 +72,7 @@
             }
             ?>
         </div>
-        <div class="bug-table rounded light-gray">
+        <div class="bug-table">
             <?php
             $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
             if (!$conn) {
@@ -104,22 +104,27 @@
                 }
             }
 
-            while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
-                echo '
-                <div class="bug-report rounded white">
-          						<div class="report-left">
-          							<p class="service dark-gray-text">',$row[0],'</p>
-          							<p class="title"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p>
-          							<p class="id dark-gray-text">Submitted on ',$row[4],'</p>
-          						</div>
-          						<div class="report-right">
-          							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
-        						</div>
-                </div>';
+            $row = oci_fetch_array($query, OCI_BOTH);
+            if ($row == false) {
+                echo '<p class="no-bugs blue-text">No Bugs to Show</p>';
+            } else {
+                do {
+                    echo '
+                    <div class="bug-report rounded light-gray">
+              						<div class="report-left">
+              							<p class="service dark-gray-text">',$row[0],'</p>
+              							<p class="title blue-text"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p></a>
+              							<p class="date dark-gray-text">Submitted on ',$row[4],'</p>
+              						</div>
+              						<div class="report-right">
+              							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
+            						</div>
+                    </div>';
+                } while (($row = oci_fetch_array($query, OCI_BOTH)) != false);
             }
+
             OCILogoff($conn);
             ?>
-
         </div>
     </div>
 

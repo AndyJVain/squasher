@@ -45,3 +45,42 @@ create table squasher_reports(
 );
 
 --insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'connor-carraher', '29-OCT-18','blablabla');
+
+--
+-- TABLE TRIGGERS
+--
+--handles updating the number of assigned bugs a user has ON UPDATE
+CREATE or REPLACE TRIGGER update_numAssigned
+    BEFORE UPDATE on squasher_reports
+    FOR EACH ROW
+DECLARE
+    v_num_old NUMBER;
+    v_num_new NUMBER;
+BEGIN
+
+    select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
+    select NUM_ASSIGNED into v_num_old from squasher_user where USERNAME = :old.ASSIGNED;
+
+    update squasher_user set NUM_ASSIGNED = (v_num_old - 1) where USERNAME = :old.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_new + 1) where USERNAME = :new.ASSIGNED;
+
+
+END;
+/
+show errors;
+
+--handles updating the number of assigned bugs a user has ON INSERTION
+CREATE or REPLACE TRIGGER insert_numAssigned
+    BEFORE INSERT on squasher_reports
+    FOR EACH ROW
+DECLARE
+    v_num_new NUMBER;
+BEGIN
+
+
+    select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
+    update squasher_user set NUM_ASSIGNED = (v_num_new+1) where USERNAME = :new.ASSIGNED;
+
+END;
+/
+show errors;
