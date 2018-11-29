@@ -104,20 +104,22 @@
                 }
             }
 
-            // echo '<p class="no-bugs blue-text">No Assigned Bugs</p>';
-
-            while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
-                echo '
-                <div class="bug-report rounded light-gray">
-          						<div class="report-left">
-          							<p class="service dark-gray-text">',$row[0],'</p>
-          							<p class="title blue-text"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p></a>
-          							<p class="date dark-gray-text">Submitted on ',$row[4],'</p>
-          						</div>
-          						<div class="report-right">
-          							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
-        						</div>
-                </div>';
+            if ($row == false) {
+                echo '<p class="no-bugs blue-text">No Assigned Bugs</p>';
+            } else {
+                do {
+                    echo '
+                    <div class="bug-report rounded light-gray">
+              						<div class="report-left">
+              							<p class="service dark-gray-text">',$row[0],'</p>
+              							<p class="title blue-text"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p></a>
+              							<p class="date dark-gray-text">Submitted on ',$row[4],'</p>
+              						</div>
+              						<div class="report-right">
+              							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
+            						</div>
+                    </div>';
+                } while (($row = oci_fetch_array($query, OCI_BOTH)) != false);
             }
 
             OCILogoff($conn);
