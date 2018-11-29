@@ -55,10 +55,11 @@
                         print "<br> connection failed:";
                         exit;
                     }
+                    include '../clean-input.php';
 
                     //Fetch the input user data from POST
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
+                    $username = clean($_POST["username"]);
+                    $password = clean($_POST["password"]);
 
                     //Hash password for security reasons
                     $hashedPassword = hash("sha256", $password);

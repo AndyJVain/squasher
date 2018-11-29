@@ -49,10 +49,11 @@
                         print "<br> connection failed:";
                         exit;
                     }
+                    include '../clean-input.php';
 
                     //Fetch new account information from POST
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
+                    $username = clean($_POST["username"]);
+                    $password = clean($_POST["password"]);
                     $email = $_POST["email"];
 
                     //Hash password for security purposes
