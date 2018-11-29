@@ -1,6 +1,14 @@
+/*
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file configures the database schema and inserts the initial users into the database.
+					 This file will be run once at the beginning of the installation process.
+*/
 
+--
+-- TABLE DEFINITIONS
+--
 drop table squasher_user;
-
 create table squasher_user(
 	USERNAME varchar(50) PRIMARY KEY,
 	EMAIL varchar(50) NOT NULL,
@@ -10,16 +18,10 @@ create table squasher_user(
 	LATEST_ASSIGNED_BUG NUMBER
  );
 
-insert into squasher_user values('reporter','ccarraher@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','REPORTER',0,0);
-insert into squasher_user values('tester','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER',0,0);
-insert into squasher_user values('tester1','tester@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','TESTER',0,0);
-insert into squasher_user values('dev','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER',0,0);
-insert into squasher_user values('dev1','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER',0,0);
-insert into squasher_user values('dev2','developer@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DEVELOPER',0,0);
-insert into squasher_user values('manager','manager@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','MANAGER',0,0);
+ --insert into squasher_user values('manager','<MANAGER EMAIL>','<SHA256 HASHED PASSWORD>','MANAGER',0,0);
+ insert into squasher_user values('manager','manager@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','MANAGER',0,0);
 
 insert into squasher_user values('assigner','d@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
-insert into squasher_user values('assigner_fix','d@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
 insert into squasher_user values('failed','b@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
 insert into squasher_user values('done','b@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
 
@@ -43,13 +45,15 @@ create table squasher_reports(
 	REPORT_DATE VARCHAR(50) NOT NULL,
 	DESCRIPTION VARCHAR(3000) NOT NULL
 );
+--
+-- END TABLE DEFINITIONS
+--
 
---insert into squasher_reports values(0, 'CAMINO', 'NOT LIT', 'SECURITY', 'ALWAYS', 'connor-carraher', 'PENDING BUG VERIFICATION', 'connor-carraher', '29-OCT-18','blablabla');
 
 --
 -- TABLE TRIGGERS
 --
---handles updating the number of assigned bugs a user has ON UPDATE
+--Handles updating the number of assigned bugs a user has ON UPDATE
 CREATE or REPLACE TRIGGER update_numAssigned
     BEFORE UPDATE on squasher_reports
     FOR EACH ROW
@@ -57,30 +61,26 @@ DECLARE
     v_num_old NUMBER;
     v_num_new NUMBER;
 BEGIN
-
     select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
     select NUM_ASSIGNED into v_num_old from squasher_user where USERNAME = :old.ASSIGNED;
-
     update squasher_user set NUM_ASSIGNED = (v_num_old - 1) where USERNAME = :old.ASSIGNED;
     update squasher_user set NUM_ASSIGNED = (v_num_new + 1) where USERNAME = :new.ASSIGNED;
-
-
 END;
 /
 show errors;
 
---handles updating the number of assigned bugs a user has ON INSERTION
+--Handles updating the number of assigned bugs a user has ON INSERTION
 CREATE or REPLACE TRIGGER insert_numAssigned
     BEFORE INSERT on squasher_reports
     FOR EACH ROW
 DECLARE
     v_num_new NUMBER;
 BEGIN
-
-
     select NUM_ASSIGNED into v_num_new from squasher_user where USERNAME = :new.ASSIGNED;
     update squasher_user set NUM_ASSIGNED = (v_num_new+1) where USERNAME = :new.ASSIGNED;
-
 END;
 /
 show errors;
+--
+-- END TABLE TRIGGERS
+--

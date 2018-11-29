@@ -1,3 +1,10 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file displays the new bug report form.
+           Once the form has been completed and submitted, a PHP script is called to put the bug into the database.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +22,9 @@
 </head>
 
 <body>
-  <?php
+    <?php
     include '../session.php';
-  ?>
+    ?>
     <div class="container">
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Report New Bug</div>
@@ -78,7 +85,7 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="16" name="description" required>Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
+                    <textarea class="form-control description-form" id="description" rows="16" name="description" required>Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
                 </div>
                 <input type="submit" class="btn btn-primary btn-lg submit-btn blue" value="Submit">
             </form>

@@ -1,3 +1,11 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file displays the login page.
+           If a valid username and password combination is submitted, the user will be redirected to the home view.
+           A redirect to reporter account creation is also accesible.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,48 +42,52 @@
                 <p class="center-text"><a href="create-reporter.php">Create</a> a new account</p>
 
                 <?php
+                //Creates a new session if one does not already exist
                 if (isset($_SESSION['username'])) {
                     session_destroy();
                 }
                 session_start();
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // username and password sent from form
-
-                    $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+                    include '../connection.php';
+                    $conn = connect();
                     if (!$conn) {
                         print "<br> connection failed:";
                         exit;
                     }
 
+                    //Fetch the input user data from POST
                     $username = $_POST["username"];
                     $password = $_POST["password"];
 
-                    $hashedPassword = hash("sha256",$password);
+                    //Hash password for security reasons
+                    $hashedPassword = hash("sha256", $password);
 
+                    //Prepare and execute query to authenticate user
                     $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username' and password = '$hashedPassword'";
                     $query = oci_parse($conn, $queryString);
-
                     oci_execute($query);
-
                     $row = oci_fetch_array($query, OCI_BOTH);
 
+                    //Authenticate user
                     if ($row[0] == 0) {
+                        //If user cannot be authenticated, do not grant them a session and raise an error
                         echo '<p class="center-text error-message">Incorrect Username or Password</p>';
                     } else {
-                        //verified user
+                        //Else user has been authenticated so create a username variable in their session
                         $_SESSION['username'] = $username;
 
+                        //Also create a role variable in their session
                         $query = oci_parse($conn, "select role from squasher_user where username = '$username'");
                         oci_execute($query);
                         $row = oci_fetch_array($query, OCI_BOTH);
                         $_SESSION['role'] = $row[0];
 
+                        OCILogoff($conn);
                         header("location: home.php");
                     }
                 }
                 ?>
-
             </div>
         </div>
     </div>

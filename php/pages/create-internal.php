@@ -1,3 +1,9 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file displays the form which allows the manager to create an internal user. Once submitted, the user is inserted into the database.
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +17,7 @@
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/create.css">
 
-    <title>Squasher - Create Account</title>
+    <title>Squasher - Create Internal Account</title>
 </head>
 
 <body>
@@ -44,37 +50,41 @@
                     <a type="button" class="btn btn-secondary white" href="home.php">Cancel</a>
                 </form>
                 <?php
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                include '../session.php';
 
-                    $conn=oci_connect('psanchez', 'a47k7S4QOi', '//dbserver.engr.scu.edu/db11g');
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    include '../connection.php';
+                    $conn = connect();
                     if (!$conn) {
                         print "<br> connection failed:";
                         exit;
                     }
 
+                    //Retrieve the new account information from POST
                     $username = $_POST["username"];
                     $password = $_POST["password"];
                     $email = $_POST["email"];
                     $role = $_POST["role"];
 
-                    $hashedPassword = hash("sha256",$password);
+                    //Hash the password for security purposes
+                    $hashedPassword = hash("sha256", $password);
 
+                    //Prepare query to check for duplicate accounts
                     $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username'";
                     $query = oci_parse($conn, $queryString);
                     oci_execute($query);
-
                     $row = oci_fetch_array($query, OCI_BOTH);
 
+                    //Check to see if this account already exists
                     if ($row[0] != 0) {
+                        //If it already exists, then do not create an account and raise an error
                         echo '<p class="center-text error-message">Username Already Exists</p>';
                     } else {
+                        //Otherwise commit the new account into the database
                         $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', '$role', 0, 0)";
-
                         $query = oci_parse($conn, $queryString);
                         oci_execute($query);
-
                         OCILogoff($conn);
-
                         header("Location: home.php");
                     }
                 }
