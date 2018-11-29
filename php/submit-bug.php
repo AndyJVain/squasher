@@ -92,6 +92,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     OCILogoff($conn);
 
     print_r($newReportQuery);
+    print_r(htmlspecialchars($title));
+
 
     //header("Location: pages/home.php");
 }
