@@ -181,7 +181,6 @@
                                         <select class="form-control" id="select-developer" name="assigned_developer" required>
                                             <option value="" disabled selected>Select a developer</option>
                                             <?php
-                                            include '../connection.php';
                                             $conn = connect();
                                             if (!$conn) {
                                                 print "<br> connection failed:";

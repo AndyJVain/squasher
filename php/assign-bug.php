@@ -54,7 +54,6 @@ function getLeastWorkedTester($bug_id){
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     include '../connection.php';
     $conn = connect();
     if (!$conn) {
