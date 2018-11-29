@@ -1,3 +1,10 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file displays the new bug report form.
+           Once the form has been completed and submitted, a PHP script is called to put the bug into the database.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +22,9 @@
 </head>
 
 <body>
-  <?php
+    <?php
     include '../session.php';
-  ?>
+    ?>
     <div class="container">
         <nav class="navbar navbar-light">
             <div class="navbar-brand">Report New Bug</div>

@@ -50,6 +50,8 @@
                     <a type="button" class="btn btn-secondary white" href="home.php">Cancel</a>
                 </form>
                 <?php
+                include '../session.php';
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     include '../connection.php';
                     $conn = connect();

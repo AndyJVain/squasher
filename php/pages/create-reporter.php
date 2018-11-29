@@ -1,3 +1,9 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file displays the form which allows a reporter to create an internal user. Once submitted, the user is inserted into the database.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,40 +44,41 @@
                 <?php
                 include '../connection.php';
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
                     $conn=connect();
                     if (!$conn) {
                         print "<br> connection failed:";
                         exit;
                     }
 
+                    //Fetch new account information from POST
                     $username = $_POST["username"];
                     $password = $_POST["password"];
                     $email = $_POST["email"];
-                    $hashedPassword = hash("sha256",$password);
 
+                    //Hash password for security purposes
+                    $hashedPassword = hash("sha256", $password);
+
+                    //Prepare query to check for duplicate accounts
                     $queryString = "SELECT COUNT(username) FROM squasher_user WHERE username = '$username'";
                     $query = oci_parse($conn, $queryString);
                     oci_execute($query);
-
                     $row = oci_fetch_array($query, OCI_BOTH);
 
+                    //Check for different accounts
                     if ($row[0] != 0) {
+                        //If a duplicate exists, do not create the account and raise an error
                         echo '<p class="center-text error-message">Username Already Exists</p>';
-                    } else {
-                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', 'REPORTER', 0, 0)";
-
-                        $binderVariable = 'Connor';
-
-                        $query = oci_parse($conn, $queryString);
-                        oci_bind_by_name($query, ':title', $binderVariable);
-                        oci_execute($query);
-
                         OCILogoff($conn);
-
+                    } else {
+                        //Otherwise commit the new account to the database
+                        $queryString = "insert into squasher_user values ('$username', '$email', '$hashedPassword', 'REPORTER', 0, 0)";
+                        $query = oci_parse($conn, $queryString);
+                        oci_execute($query);
+                        OCILogoff($conn);
                         header("Location: login.php");
                     }
                 }
+
                 ?>
             </div>
         </div>

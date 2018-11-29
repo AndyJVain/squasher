@@ -1,3 +1,9 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file acts as the configuration file for the database credentials and system email.
+ -->
+
 <?php
 /*
 Example

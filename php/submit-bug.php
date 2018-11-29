@@ -1,9 +1,16 @@
+<!--
+  Author: Andy Vainauskas, Connor Carraher, Pedro Sanchez
+  Date: 11/29/2018
+  Purpose: This file submits a bug report.
+-->
+
 <html>
 <body>
 
 <?php
 include 'session.php';
 
+//Fetch relevant information from POST and SESSION variables
 $product = $_POST["product"];
 $title = $_POST["title"];
 $bugType = $_POST["bug-type"];
@@ -11,13 +18,15 @@ $rep = $_POST["rep"];
 $description = $_POST["description"];
 $reporterUsername = $_SESSION['username'];
 
-//by default, will assign to tester (pedro)
-//Will setup a trigger to handle auto-assignment on DB side
-$defaultAssigned = 'assigner';
-
+//Next state such that bug is always sent to tester
 $defaultState = "PENDING BUG VERIFICATION";
 
-function getLeastWorkedTester($bug_id)
+/*
+  Function Name: getLeastWorkedTester
+  Arguments: none
+  Purpose: Queries the database and returns the tester with the fewest assigned bugs.
+*/
+function getLeastWorkedTester()
 {
     $conn = connect();
     if (!$conn) {
@@ -38,7 +47,6 @@ function getLeastWorkedTester($bug_id)
     $row_assignee = oci_fetch_array($query, OCI_BOTH);
 
     $assignee = $row_assignee['ASSIGNEE'];
-
     return $assignee;
 }
 
@@ -50,43 +58,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    $getReportNumberQuery = "select MAX(REPORT_NUMBER) from SQUASHER_COUNTER";
-    $getDateQuery = "select SYSDATE from DUAL";
-
     //Get current ReportNumber
+    $getReportNumberQuery = "select MAX(REPORT_NUMBER) from SQUASHER_COUNTER";
     $query = oci_parse($conn, $getReportNumberQuery);
     oci_execute($query);
     $row_reportNumber = oci_fetch_array($query, OCI_BOTH);
     $reportNumber = $row_reportNumber[0];
 
-    //potential issue with timing attack
-    //empty reportNumber table
+    //Update Report Number
     $updateReportNumberQuery = "delete squasher_counter where report_number < ($reportNumber+1)";
     $query = oci_parse($conn, $updateReportNumberQuery);
     oci_execute($query);
-
-    //update ReportNumber
     $updateReportNumberQuery = "insert into squasher_counter values($reportNumber+1)";
     $query = oci_parse($conn, $updateReportNumberQuery);
     oci_execute($query);
 
     //Get SYSDATE
+    $getDateQuery = "select SYSDATE from DUAL";
     $query = oci_parse($conn, $getDateQuery);
     oci_execute($query);
     $row_date = oci_fetch_array($query, OCI_BOTH);
     $sysDate = $row_date[0];
 
-    //get the tester that this should be assigned to`
+    //Run the tester assignment algorithm
     $newAssigned = getLeastWorkedTester($reportNumber);
 
-    //setup query for new report
+    //Commit new report to database
     $newReportQuery = "insert into SQUASHER_REPORTS values('$reportNumber','$product','$title','$bugType','$rep','$newAssigned','$defaultState','$reporterUsername','$sysDate','$description')";
     echo($newReportQuery);
     $query = oci_parse($conn, $newReportQuery);
     oci_execute($query);
 
     OCILogoff($conn);
-
     header("Location: pages/home.php");
 }
 ?>
