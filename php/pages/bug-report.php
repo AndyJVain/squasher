@@ -63,33 +63,37 @@
         }
         $bug_id = intval($_GET['bug_id']);
 
-        $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCIBILITY, DESCRIPTION, STATE, REPORT_DATE from squasher_reports where BUG_ID = '$bug_id'");
+        $query = oci_parse($conn, "select PRODUCT, TITLE, BUG_TYPE, REPRODUCIBILITY, DESCRIPTION, STATE, REPORT_DATE, ASSIGNED, REPORTER_USERNAME from squasher_reports where BUG_ID = '$bug_id'");
 
         oci_execute($query);
         $row = oci_fetch_array($query, OCI_BOTH);
 
-        echo '<div class="report rounded light-gray">
-            <div class="report-group blue-text">
-                <label for="product">Product</label>
-                <p>',$row[0],'</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="title">Title</label>
-                <p>',$bug_id,':',$row[1],'</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="bug-type">Bug Type</label>
-                <p>',$row[2],'</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="reproducibility">Reproducibility</label>
-                <p>',$row[3],'</p>
-            </div>
-            <div class="report-group blue-text">
-                <label for="description">Description</label>
-                <p>',$row[4],'</p>
-            </div>';
-          OCILogoff($conn);
+        if($row['ASSIGNED'] != $_SESSION['username'] && $row['REPORTER_USERNAME'] != $_SESSION['username'] && $$_SESSION['role'] != 'MANAGER'){
+            header("location: home.php");
+        } else {
+          echo '<div class="report rounded light-gray">
+              <div class="report-group blue-text">
+                  <label for="product">Product</label>
+                  <p>',$row[0],'</p>
+              </div>
+              <div class="report-group blue-text">
+                  <label for="title">Title</label>
+                  <p>',$bug_id,':',$row[1],'</p>
+              </div>
+              <div class="report-group blue-text">
+                  <label for="bug-type">Bug Type</label>
+                  <p>',$row[2],'</p>
+              </div>
+              <div class="report-group blue-text">
+                  <label for="reproducibility">Reproducibility</label>
+                  <p>',$row[3],'</p>
+              </div>
+              <div class="report-group blue-text">
+                  <label for="description">Description</label>
+                  <p>',$row[4],'</p>
+              </div>';
+        }
+        OCILogoff($conn);
         ?>
             <div class="next-state-container">
                 <?php
