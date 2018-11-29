@@ -71,12 +71,7 @@
 
 
         if($row['ASSIGNED'] != $_SESSION['username'] && $row['REPORTER_USERNAME'] != $_SESSION['username'] && $_SESSION['role'] != 'MANAGER'){
-            //header("location: home.php");
-            print_r($_SESSION['username']);
-            print_r($row['ASSIGNED']);
-            print_r($row['REPORTER_USERNAME']);
-            print_r($_SESSION['role']);
-
+            header("location: home.php");
         } else {
           echo '<div class="report rounded light-gray">
               <div class="report-group blue-text">
