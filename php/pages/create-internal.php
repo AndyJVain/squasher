@@ -60,9 +60,11 @@
                         exit;
                     }
 
+                    include 'clean-input.php';
+
                     //Retrieve the new account information from POST
-                    $username = $_POST["username"];
-                    $password = $_POST["password"];
+                    $username = clean($_POST["username"]);
+                    $password = clean($_POST["password"]);
                     $email = $_POST["email"];
                     $role = $_POST["role"];
 
