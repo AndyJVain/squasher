@@ -7,7 +7,8 @@
 /*
   Function Name: connect
   Arguments: none
-  Purpose: Returns an oci connection to the database.
+  Purpose: Establishes a connection to the database.
+  Returns: oci connection to the database (type == a connection resource with parameters of strings)
 */
 function connect()
 {

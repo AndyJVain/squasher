@@ -25,6 +25,7 @@ $defaultState = "PENDING BUG VERIFICATION";
   Function Name: getLeastWorkedTester
   Arguments: none
   Purpose: Queries the database and returns the tester with the fewest assigned bugs.
+  Returns: Username of chosen tester with fewest assigned bugs (type == string)
 */
 function getLeastWorkedTester()
 {

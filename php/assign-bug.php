@@ -20,8 +20,9 @@ $username = $_SESSION['username'];
 
 /*
   Function Name: emailReporter
-  Arguments: bug_id
+  Arguments: bug_id (type == mixed)
   Purpose: Uses the bug id and retrieves the associated email address from the database. An email is then sent.
+  Returns: Null
 */
 function emailReporter($bug_id)
 {
@@ -46,6 +47,7 @@ function emailReporter($bug_id)
   Function Name: getLeastWorkedTester
   Arguments: none
   Purpose: Queries the database and returns the tester with the fewest assigned bugs.
+  Returns: Username of chosen tester with fewest assigned bugs (type == string)
 */
 function getLeastWorkedTester()
 {
