@@ -4,10 +4,12 @@
 }
 
 .menu-list {
-  position: absolute;
-  top: 100%; /* Bottom of button */
-  right: 0;
-  margin-left: -150px; /* More to the left */
+    position: absolute;
+    top: 100%;
+    /* Bottom of button */
+    right: 0;
+    margin-left: -150px;
+    /* More to the left */
 }
 
 .form-control {
@@ -42,24 +44,35 @@
 .report-left {
     display: flex;
     height: 100%;
-    width: 80%;
+    width: auto;
     flex-direction: column;
     justify-content: space-between;
     float: left;
 }
 
 .report-right {
+    display: flex;
     height: 100%;
     width: auto;
+    flex-direction: column;
+    justify-content: space-between;
     float: right;
+}
+
+.service {
+    margin-top: 10px;
 }
 
 .title {
     font-size: 22px;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-.id {
-    margin-top: 20px;
+.date {
+    margin-top: 10px;
+}
+
+.status {
+    margin-top: 10px;
 }

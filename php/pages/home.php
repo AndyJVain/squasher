@@ -109,8 +109,8 @@
                 <div class="bug-report rounded white">
           						<div class="report-left">
           							<p class="service dark-gray-text">',$row[0],'</p>
-          							<p class="title"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p>
-          							<p class="id dark-gray-text">Submitted on ',$row[4],'</p>
+          							<p class="title"><a href="../pages/bug-report.php?bug_id=',$row[2],'&state=',$row[3],'">',$row[2],': ',$row[1],'</p></a>
+          							<p class="date dark-gray-text">Submitted on ',$row[4],'</p>
           						</div>
           						<div class="report-right">
           							<p class="status dark-gray-text">Current status: ',$row[3],'</p>
@@ -119,7 +119,6 @@
             }
             OCILogoff($conn);
             ?>
-
         </div>
     </div>
 
