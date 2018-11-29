@@ -90,22 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     OCILogoff($conn);
 
-
-
-
-    $a = htmlspecialchars($title);
-    $b = htmlentities($title);
-    $c = substr_replace($a,"\'","&#39;");
-    $d = substr_replace($b,"\'","&#39;");
-    $e = substr_replace($title,"\'","&#39;");
-    echo($title);
-    echo($a);
-    echo($b);
-    echo($c);
-    echo($d);
-    echo($e);
-
-    //header("Location: pages/home.php");
+    header("Location: pages/home.php");
 }
 ?>
 
