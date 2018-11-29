@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group blue-text">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="16" name="description" required>Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
+                    <textarea class="form-control description-form" id="description" rows="16" name="description" required>Summary:&#10;&#10;&#10;Steps to Reproduce:&#10;&#10;&#10;Expected Result:&#10;&#10;&#10;Actual Result:&#10;&#10;&#10;Browser/System:&#10;</textarea>
                 </div>
                 <input type="submit" class="btn btn-primary btn-lg submit-btn blue" value="Submit">
             </form>
