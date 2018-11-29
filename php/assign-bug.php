@@ -65,7 +65,7 @@ function getLeastWorkedTester()
     $minAssigned = $row_min['MINIMUM'];
 
     //Choose a tester that has the minimum number of bugs assigned to them
-    $getUsername = "select username as ASSIGNEE from squasher_user where ROLE = 'TESTER' and USERNAME != 'assigner' and NUM_ASSIGNED = $minAssigned and ROWNUM <= 1";
+    $getUsername = "select username as ASSIGNEE from squasher_user where ROLE = 'TESTER' and NUM_ASSIGNED = $minAssigned and ROWNUM <= 1";
     $query = oci_parse($conn, $getUsername);
     oci_execute($query);
     $row_assignee = oci_fetch_array($query, OCI_BOTH);

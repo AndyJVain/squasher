@@ -21,7 +21,6 @@ create table squasher_user(
  --insert into squasher_user values('manager','<MANAGER EMAIL>','<SHA256 HASHED PASSWORD>','MANAGER',0,0);
  insert into squasher_user values('manager','manager@scu.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','MANAGER',0,0);
 
-insert into squasher_user values('assigner','d@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
 insert into squasher_user values('failed','b@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
 insert into squasher_user values('done','b@junk.edu','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','DUMMY',0,0);
 
