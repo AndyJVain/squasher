@@ -20,7 +20,7 @@ $defaultAssigned = 'assigner';
 $defaultState = "PENDING BUG VERIFICATION";
 
 function getLeastWorkedTester($bug_id) {
-    include '../connection.php';
+    include 'connection.php';
     $conn = connect();
     if (!$conn) {
       print "<br> connection failed:";
@@ -45,7 +45,7 @@ function getLeastWorkedTester($bug_id) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '../connection.php';
+    include 'connection.php';
     $conn = connect();
     if (!$conn) {
         print "<br> connection failed:";
