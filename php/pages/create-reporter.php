@@ -36,7 +36,7 @@
                     <a type="button" class="btn btn-secondary white" href="login.php">Cancel</a>
                 </form>
                 <?php
-                include 'connection.php';
+                include '../connection.php';
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $conn=connect();
