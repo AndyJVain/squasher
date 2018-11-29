@@ -55,7 +55,7 @@
                         print "<br> connection failed:";
                         exit;
                     }
-                    include 'clean-input.php';
+                    include '../clean-input.php';
 
                     //Fetch the input user data from POST
                     $username = clean($_POST["username"]);

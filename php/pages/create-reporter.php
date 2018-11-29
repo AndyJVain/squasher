@@ -49,7 +49,7 @@
                         print "<br> connection failed:";
                         exit;
                     }
-                    include 'clean-input.php';
+                    include '../clean-input.php';
 
                     //Fetch new account information from POST
                     $username = clean($_POST["username"]);
