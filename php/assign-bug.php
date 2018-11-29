@@ -10,6 +10,10 @@ $state = $_POST['state'];
 $role = $_SESSION['role'];
 $username = $_SESSION['username'];
 
+/*
+  function name: emailReporter
+  arguments: bug idea
+*/
 function emailReporter($bug_id){
     $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
 
@@ -17,7 +21,7 @@ function emailReporter($bug_id){
 
     $getEmailQuery = "select * from squasher_user where username = (select reporter_username from squasher_reports where bug_id = $bug_id)";
 
-    include 'connection.php';
+    //include 'connection.php';
     $conn = connect();
     $query = oci_parse($conn, $getEmailQuery);
     oci_execute($query);
@@ -29,7 +33,7 @@ function emailReporter($bug_id){
 }
 
 function getLeastWorkedTester($bug_id){
-    include 'connection.php';
+    //include 'connection.php';
     $conn = connect();
     if (!$conn) {
       print "<br> connection failed:";
