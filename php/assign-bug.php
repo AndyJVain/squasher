@@ -22,7 +22,7 @@ $username = $_SESSION['username'];
   Purpose: The function uses the bug id and retrieves the associated email address from the database. An email is then sent.
 */
 function emailReporter($bug_id){
-    include 'config.php'
+    include 'config.php';
     $msg = "A bug associated with your Squasher Account has been updated. Sign in at squasher.tk to view it.";
 
     $headers = $sender_email;
