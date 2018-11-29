@@ -9,14 +9,16 @@
 
 <?php
 include 'session.php';
+include 'clean-input.php';
 
 //Fetch relevant information from POST and SESSION variables
 $product = $_POST["product"];
-$title = $_POST["title"];
+$title = clean($_POST["title"]);
 $bugType = $_POST["bug-type"];
 $rep = $_POST["rep"];
-$description = $_POST["description"];
+$description = clean($_POST["description"]);
 $reporterUsername = $_SESSION['username'];
+
 
 //Next state such that bug is always sent to tester
 $defaultState = "PENDING BUG VERIFICATION";
