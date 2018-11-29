@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $a = htmlspecialchars($title, ENT_QUOTES);
-    $b = htmlentities($title, ENT_QUOTES)
+    $b = htmlentities($title, ENT_QUOTES);
     print_r($title);
     print_r($a);
     print_r($b);
