@@ -19,7 +19,6 @@ $defaultState = "PENDING BUG VERIFICATION";
 
 function getLeastWorkedTester($bug_id)
 {
-    // include 'connection.php';
     $conn = connect();
     if (!$conn) {
         print "<br> connection failed:";
